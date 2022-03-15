@@ -1,8 +1,8 @@
 ---
 home: true
-heroText: Titel van je thesis
+heroText: Analyse IT omgeving
 heroImage: /vives-logo.png
-tagline: door Student Name
+tagline: door Ben Boydens
 actions:
   - text: Lees verder →
     link: /introduction/
@@ -18,12 +18,12 @@ footer: Bachelorproef aangeboden tot het behalen van het diploma van Bachelor in
 
 Deze eindverhandeling werd geschreven onder begeleiding van volgende mentoren:
 
-* **Naam van Persoon 1**
-  * Functie binnen het bedrijf
+* **Philip Van Isacker**
+  * ICT & Senior Developper
   * email indien toegestaan
 
-* **Naam van Persoon 2**
-  * Functie binnen het bedrijf
+* **Nick Legroe**
+  * ICT & Senior Developper
   * email indien toegestaan
 
 <!-- Plaats enkel het mail-adres van jouw promotor(en) indien je hier uitdrukkelijk toestemming voor gekregen hebt. -->

@@ -13,6 +13,11 @@ module.exports = {
     docsBranch: 'master',
     sidebar: [
       '/introduction/',
+      '/huidige-omgeving',
+      '/stappenplan',
+      '/cloud-providers',
+      '/vergelijken',
+      '/eerste-stappen',
       '/01-chapter-xxx/',
       '/02-chapter-yyy/',
       '/conclusion/',
