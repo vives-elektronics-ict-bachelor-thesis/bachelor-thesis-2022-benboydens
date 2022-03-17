@@ -8,7 +8,7 @@ module.exports = {
       { text: 'VIVES', link: 'https://www.vives.be' },
     ],
     sidebarDepth: 1,
-    repo: 'https://github.com/vives-elektronics-ict-bachelor-thesis/bachelor-thesis-vuepress-template',
+    repo: 'https://github.com/vives-elektronics-ict-bachelor-thesis/bachelor-thesis-2022-benboydens',
     docsDir: 'docs',
     docsBranch: 'master',
     sidebar: [
