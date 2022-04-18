@@ -2,6 +2,11 @@
 
 Heel wat bedrijven gebruiken nog lokale servers om hun applicaties en data op te slaan. Dit geeft hun veel controle over wat er gebeurt met hun IT omgeving, maar heeft ook zijn nadelen. Met Cloud computing kun je de omgeving vernieuwen en klaar maken voor de toekomst.
 
+Ook iets belangrijk voor Dataline is redundancy. Wanneer er plots iets niet meer werkt dan moet er een alternatief zijn om snel de services terug up and running te krijgen. 
+Nu is er een **Single Point Of Failure** als er lokaal op de server iets misgaat dan werkt de service volledig niet meer. Er moet dan van een incrementele back up een image genomen worden en die wordt dan terug opgezet.
+
+Dit kan lang duren en is niet de enige optie. De verschillende opties moeten vergeleken worden!
+
 ## Probleemstelling
 
 Vele bedrijven willen graag hun IT omgeving vernieuwen. Het opslaan van data en onderhouden van applicaties kan een dure operatie zijn. Daarom dat een bedrijf best eens kijkt naar de opties die ter beschikking staan. Over het algemeen zijn er 3 opties waar tussen een bedrijf kan kiezen om hun data op te slaan:
