@@ -1,11 +1,9 @@
 # Introductie
 
-Heel wat bedrijven gebruiken nog lokale servers om hun applicaties en data op te slaan. Dit geeft hun veel controle over wat er gebeurt met hun IT omgeving, maar heeft ook zijn nadelen. Met Cloud computing kun je de omgeving vernieuwen en klaar maken voor de toekomst.
+Heel wat bedrijven gebruiken nog lokale servers om hun applicaties en data op te slaan. Dit geeft hun veel controle over wat er gebeurt met hun IT omgeving, maar heeft ook zijn nadelen. Een alternatief hiervoor is **Cloud computing** en het wordt steeds populairder. Met cloud computing is het gemakkelijker om de omgeving te vernieuwen en klaar maken voor de toekomst. Ook is er geen nood meer om dure servers en apparatuur aan te kopen.
 
-Ook iets belangrijk voor Dataline is redundancy. Wanneer er plots iets niet meer werkt dan moet er een alternatief zijn om snel de services terug up and running te krijgen. 
-Nu is er een **Single Point Of Failure** als er lokaal op de server iets misgaat dan werkt de service volledig niet meer. Er moet dan van een incrementele back up een image genomen worden en die wordt dan terug opgezet.
-
-Dit kan lang duren en is niet de enige optie. De verschillende opties moeten vergeleken worden!
+Een ander belangrijk aspect is fout tolerancy. Het kan altijd gebeuren dat een applicatie of service plots niet meer werkt. In dat geval moet er een alternatief zijn om snel de services terug up and running te krijgen. 
+Er moet dus vermeden worden dat er een **Single Point Of Failure** bestaat. Zodat wanneer één iets kapot gaat er direct een aternatief is die de taak kan overnemen. 
 
 ## Probleemstelling
 
@@ -19,9 +17,9 @@ Elke van deze opties heeft zijn voor- en nadelen. Wat is nu de beste oplossing q
 
 ## Dataline Solutions nv
 
-Dataline is een bedrijf die actief is in de print industrie en een de ontwikkelaar van software. Multipress is één van hun applicaties, het digitaliseerd het volledige process van drukkerijen. Van het eerste contact met de klant tot het controleren van de magezijn, en zelf de facturen opmaken. Dataline focussed ook op het helpen van de klanten en probeert zich steeds uit te breiden. Multipress is de meest populaire MIS/ERP software voor de print industrie in heel Europa!
+Dataline is een bedrijf die actief is in de print industrie en een de ontwikkelaar van software. Multipress is één van hun applicaties, het digitaliseerd het volledige process van drukkerijen. Van het eerste contact met de klant tot het controleren van de magezijn, en zelf de facturen opmaken. Dataline focust ook op het helpen van de klanten en probeert zich steeds uit te breiden. Multipress is de meest populaire MIS/ERP software voor de print industrie in heel Europa!
 
-Dataline zelf heeft in hun hoofdkantoor in Loppem een hele IT infrastructuur. Daarbij horen een heleboel applicaties die gebruikt worden door de werknemers. Sommige applicaties die worden niet meer on premise ondersteund en moeten naar de cloud. Daarom moet ik onderzoeken welke applicatie's best naar de cloud verplaatsen en welke best nog on premise blijven.
+Dataline zelf heeft in hun hoofdkantoor in Loppem een hele IT infrastructuur. Daarbij horen een heleboel applicaties die gebruikt worden door de werknemers. Sommige applicaties die worden niet meer ondersteund en moeten naar de cloud. Daarom moet ik onderzoeken welke applicatie's best naar de cloud verplaatsen en welke best nog on premise blijven.
 
 Dit is zeer belangrijk voor dataline voor de toekomst en de kostprijs van de IT infrastructuur. Hoe moet hun infrastructuur veranderen om up to date te blijven. Cloud computing kan ook de kostprijs verlagen en gebruikers gemak verhogen.
 
