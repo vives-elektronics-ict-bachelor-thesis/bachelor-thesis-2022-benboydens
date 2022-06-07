@@ -1,6 +1,6 @@
 ---
 home: true
-heroText: Analyse IT omgeving
+heroText: Vernieuwen van de on-premise infrastructuur en voorbereiden van migratie naar de cloud
 heroImage: /vives-logo.png
 tagline: door Ben Boydens
 actions:

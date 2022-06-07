@@ -36,8 +36,6 @@ Authenticatie in cloud is zeer belangrijk om te weten wie de applicatie gebruikt
 
 We kunnen onderstaande flowchart gebruiken die op de officiële Microsoft Docs staat. Deze kan ons helpen om een keuze te gaan maken. Er staan wat begrippen op die we best even uitleggen.
 
-
-
 ![Flowchart Bepalen identity](./img/azure-ad-authn-image.png)
 
 ### Inter-directory provisioning
