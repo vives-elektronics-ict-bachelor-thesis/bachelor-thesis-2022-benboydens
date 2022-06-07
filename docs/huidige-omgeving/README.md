@@ -4,7 +4,7 @@ Een logische eerste stap is om de huidige omgeving die Dataline nu heeft eens te
 
 ## Confluence
 
-Confluence wordt door iedere werknemer gebruikt en bevat een heleboel belangrijke documenten. Confluence zelf wil afstappen van de lokale on premise omgevingen en daarom verplichten ze de gebruikers om naar de cloud te gaan. Hier moet er gekeken worden hoe Confluence zal gebracht worden naar de cloud zodat de gebruikers een transparente overgang ondervinden en dat alle huidige data veilig bewaart word. [Link](https://www.atlassian.com/migration/assess/journey-to-cloud)
+Hier moet er gekeken worden hoe Confluence zal gebracht worden naar de cloud zodat de gebruikers een transparente overgang ondervinden en dat alle huidige data veilig bewaart word. [Link](https://www.atlassian.com/migration/assess/journey-to-cloud)
 
 De versie die nu gebruikt wordt on premise is de Confluence server versie. Support voor deze versie wordt stopgezet in 2024 en het is niet meer mogelijk om deze versie aan te kopen.
 
