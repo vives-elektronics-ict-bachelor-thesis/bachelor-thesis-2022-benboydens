@@ -1,3 +1,0 @@
-# Virtuele Servers Storage
-
-TODO ...
