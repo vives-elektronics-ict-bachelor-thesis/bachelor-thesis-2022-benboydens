@@ -6,7 +6,7 @@ Hoe beginnen we hier nu precies aan? Dit is een complexe opdracht omdat er een h
 
 Het verhaal begint bij de opstelling van Dataline voor ik daar in stage ging. Dingen zoals Conluence, email, telefonie, backups draaien allemaal op lokale on premise servers. 
 
-De manier dat ze toen te werk gingen is dat voor elke applicatie een virtuele machine wordt aangemaakt op een server. Zo is het gemakklijk om de resources van die applicatie te gaan beheren. Je kan makkelijk CPU cores, RAM geheugen en schijf geheugen toekennen per VM.
+De manier dat ze te werk gingen is dat voor elke applicatie een virtuele machine wordt aangemaakt op een server. Zo is het gemakklijk om de resources van die applicatie te gaan beheren. Je kan makkelijk CPU cores, RAM geheugen en schijf geheugen toekennen per VM.
 
 ### Confluence
 
@@ -42,25 +42,49 @@ Om een goede overgang van Confluence naar de Cloud te garanderen zijn er een aan
 - Nieuwe gebruikers moeten makkelijk toe te voegen zijn
 - Alle permissies en groupen moeten overeen komen in de cloud
 
-De huidige manier om gebruikers aan te maken is een gewoonte geworden. Het is ook gemakelijk dat de domain controller wordt gezien als een single source of truth. Als we Confluence naar de cloud zullen brengen dan zou er een manier moeten zijn om de gebruiker accounts van de domain controller te synchroniseren met die in de cloud. Gelukkige bestaat er hier al een gekende oplossing voor en dat is Microsoft Azure AD.
+De huidige manier van werken is gemakelijk omdat alles kan gebeuren op de domain controller. Als we Confluence naar de cloud zullen brengen dan zou er een manier moeten zijn om de gebruiker accounts van de domain controller te synchroniseren met die in de cloud. Gelukkige bestaat er hier al een gekende oplossing voor en dat is Microsoft Azure AD.
 
 ### Microsoft Azure AD
 
-Microsoft Azure AD wordt gezien als die cloud versie van een domain controller. Het is mogelijk om een verbinding op te zetten van de Domain Controller naar de Cloud via Azure AD. Dit kan gratis gebeuren omdat dit inbegrepen is bij Office 365. Office 365 is een packet van Microsoft die je toegang geeft tot cloud services zoals OneDrive maar ook tot Word, PowerPoint, teams, etc.
+Microsoft Azure AD wordt gezien als de cloud versie van een domain controller. Het is mogelijk om een verbinding op te zetten van de Domain Controller naar de Cloud via Azure AD. Dit kan gratis gebeuren omdat dit inbegrepen is bij Office 365. Office 365 is een packet van Microsoft die je toegang geeft tot cloud services zoals OneDrive maar ook tot Word, PowerPoint, teams, etc.
 
 Met Azure AD worden gebruikers en groepen automatisch gesynchroniseerd naar de cloud. De huidige manier om gebruiker aan te maken kan worden behouden en gebruikers beheren is zeer makkelijk. 
 
 Er zijn hier nog een paar problemen mee. Om dit te doen hebben we domain controller nodig die minstens Windows Server 2016 is. Dit is nu nog niet het geval dus we zullen een nieuwe domain controller moeten aanmaken met een nieuwere versie.
 
-Ook moeten we de groepen van Confluence eens herschikken en kijken op de huidige permissies op te kuisen. Dit is belangrijk omdat de huidige permissies complex te beheren zijn.
+Ook moeten we de groepen van Confluence eens herschikken en kijken om de huidige permissies op te kuisen. Dit is belangrijk omdat de huidige permissies complex te beheren zijn.
+
+## Storage
+
+Nu dat we weten wat we moeten doen om Confluence op een goede manier te gaan migreren wordt het tijd om naar de andere applicaties te kijken. Deze moeten niet per se naar de cloud maar we moeten de optie wel overwegen. Applicaties zoals de file server, back up server, mail server zouden allemaal naar de cloud kunnen. Er zijn ook applicaties die niet naar de cloud mogen zoals de telefonie servers.
+
+Een probleem dat Dataline nu nog heeft is op het vlak van storage. De telefonie servers draaien allemaal op virtuele machines. Elke virtuele machine bestaat uit een aantal bestanden die de status van de machine voorstelt. Als beveiliging worden er back ups genomen van die bestanden. Deze aanpak heeft echter enkele nadelen:
+
+- Er is een single point of failure in de telefonie servers. Als 1 iets kapot gaat kunnen mensen niet meer telefoneren.
+- Back ups nemen is lastig
+- Er zijn maar een paar mensen die weten hoe je een virtuele machine moet herstellen van een back up.
+
+We moeten dus een manier vinden om de bestanden van de VM te beveiligen tegen wanneer er iets misloopt. Dit moet een process zijn dat automatisch gebeurt.
+
+### SAN
+
+Een SAN is een storage area network. Je kan het zien als een apart netwerk speciaal gemaakt om de storage op een centrale plek op te kunnen slaan. Servers communiceren dan via dit netwerk om gebruik te maken van storage.
+
+Dit is de ideale oplossing om de virtuele machines bestendig te maken tegen fouten. De reden hiervoor is omdat we in een SAN data 2 maal kunnen opslaan. Wanneer er een fout gebeurt met de storage hebben we nog een kopie die wel werkt. Dit process kan automatisch gebeuren en er hoeft niet iemand manueel tussen te komen.
+
+### vSAN
+
+Een gekend alternatief voor SAN is een vSAN dit is een virtuele SAN die de storage van verschillende servers zal vitualiseren tot een enkele SAN datastore. Het werkt gelijkaardig als een SAN alleen is er geen nood om speciale apparatuur hiervoor te kopen. Er zijn verschillende opties om een vSAN te implementeren zoals VMWare vSAN en Starwind vSAN.
+
+VMWare vSAN kan nogal duur zijn daarom dat starwind misshien beter zou zijn. Dit wordt het best eens uitgetest.
 
 ## Samengevat
 
-Samengevat komt dit neer op het volgende:
+Samengevat komt ons stappenplan neer op het volgende:
 
-1. Ou-structuur Dataline aanpassen
+1. Groepen en permissies opkuisen Confluence
 2. Nieuwe Domain controller aanmaken
 4. Synchronisatie met de cloud installeren op nieuwe domain controller
-5. Zorgen dat alles correct werkt qua synchronisatie
+5. Kijken om Confluence te migreren naar de cloud
 6. Kijken voor storage oplossing voor telefonie servers
-7. opties vergelijken van verschillende services/applicaties
+7. Opties vergelijken van verschillende services/applicaties
