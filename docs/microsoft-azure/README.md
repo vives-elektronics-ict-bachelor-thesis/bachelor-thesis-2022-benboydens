@@ -12,37 +12,78 @@ We zullen een plan moeten bedenken om de accounts te gaan synchroniseren. Kijken
 
 ## Azure AD synchronisatie
 
-Microsoft geeft ons een heleboel mogelijkheden om dit probleem aan te pakken met een heleboel opties. Hier zullen we de stappen overlopen om tot de juiste conclusie te komen.
+Microsoft geeft ons een heleboel mogelijkheden om dit probleem aan te pakken. Hier zullen we de stappen overlopen om tot de juiste conclusie te komen.
 
-### Bepalen van Identity
+### Bepalen van Hybrid Identity
 
-Authenticatie in cloud is zeer belangrijk om te weten wie de applicatie gebruikt. Er zijn hier 3 grote manieren voor om dit te gaan uitvoeren.
 
-| Identity Method | Uitleg |
-| :---: | :--- |
-| Password hash synchronization | De hash waarde van het wachtwoord in Active Directory zal gesynchroniseerd worden met een hash die word opgeslagen in de cloud. Zo kunnen gebruikers inloggen in de cloud met hetzelfde wachtwoord. |
-| Pass-through authentication | Authenticatie gebeurt niet meer in de cloud maar on premise. De cloud maakt verbinding met de Active Directory die lokaal op het kantoor staat om te authenticeren |
-| Federation | Gebruikt een aparte vertrouwde server om de authenticatie te gaan doen. Mensen authenticeren zich aan die server waardoor ze toegang hebben aan de cloud. |
+Authenticatie in cloud is zeer belangrijk om te weten wie de applicatie gebruikt. Microsoft Er zijn 3 manieren om gebruikers te authenticeren in de cloud.
 
-### Flowchart
+- Password hash sync
+- Pass-through authentication
+- Federation
 
-We kunnen onderstaande flowchart gebruiken die op de officiële Microsoft Docs staat. Deze kan ons helpen om een keuze te gaan maken. Er staan wat begrippen op die we best even uitleggen.
+#### Password hash synchronization
+
+De hash waarde van het wachtwoord in Active Directory zal gesynchroniseerd worden met een hash die word opgeslagen in de cloud. Zo kunnen gebruikers inloggen in de cloud met hetzelfde wachtwoord. Dit is de standaard methode om authenticatie te gaan doen en het is ook de gemakkelijkste manier.
+
+![img1](./img/arch1.png)
+
+Password hash sync heeft ook een optie **Leaked credential detection**. Microsoft werkt samen met dark web onderzoekers en law enforcement agencies om gelekte credentials te vinden. Als Microsoft merkt dat er wachtwoorden van jouw organisatie tussen zitten dan wordt je daarvan op de hoogte gebracht.
+
+#### Pass-through authentication
+
+Met Pass-through authentication gebeurt de authenticatie niet meer in de cloud maar on premise. Wanneer een gebruiker probeert in te loggen via de cloud wordt er een verbinding gemaakt met de Active Directory die lokaal op het kantoor staat.
+
+![img2](./img/pta1.png)
+
+Een voordeel hiervan t.o.v. password hash sync is dat alle authenticatie nu gebeurt op de lokale domain controller. Dit zorgt dat lokale security en password policies toegepast kunnen worden zelf als de gebruiker inlogt via de cloud. 
+
+#### Federation
+
+Gebruikt een aparte vertrouwde server om de authenticatie te gaan doen. Mensen die van buiten af toegang willen tot de cloud moeten zich eerst authenticeren bij die server. Mensen die lokaal proberen in te loggen kunnen gewoon gebruik maken van de on premise active directory.
+
+![img3](./img/federated-identity.png)
+
+Het grote voordeel van Federation is dat er enorm veel vrijheid is om de authenticatie te gaan doen. De andere 2 methoden zijn standaard methoden van microsoft die beperkte functionaliteit hebben. Zo kun je bijvoorbeeld met federation smartcard authenticatie implementeren.
+
+
+
+## Hybrid Identity Keuze
+
+We kunnen onderstaande flowchart gebruiken die op de officiële Microsoft Docs staat. Deze kan ons helpen om een keuze te gaan maken.
 
 ![Flowchart Bepalen identity](./img/azure-ad-authn-image.png)
 
-### Inter-directory provisioning
+Microsoft geeft ons 5 mogelijke oplossingen om mee te werken. 
 
-Provisioning is het process die automatisch gebruiker account gaan aanmaken, verwijderen en up to date houden. Bijvoorbeeld als er een nieuwe werkkracht is in ons bedrijf komt worden er accounts aangemaakt in de cloud, in active directory en voor de applicaties die de gebruiker nodig heeft.
+- Password Hash Sync
+- Pass-through Auth 
+- Pass-through Auth + Password Hash Sync
+- Federation
+- Federation + Password Hash Sync
 
-Er bestaan 3 soorten provisioning:
+Password hash Sync kan gecombineerd worden met de andere authenticatie methoden. Zo kunnen we **Leaked Credentials Detection** van password hash sync combineren met Pass-through authentication en Federation. 
+Dit heeft nog een ander voordeel en dat is dat we Password hash sync kunnen gebruiken als backup methode voor moest er iets mislopen. Dit wordt ook **Sign in disaster recovery** genoemd en je kunt het zien in de flowchart.
 
-- **HR-driven provisioning:** Provisioning tussen HR en de cloud
-- **Application provisioning:** Provisioning tussen de cloud en de applicaties
-- **Directory provisioning:** Provisiong tussen de cloud en on-premise active directory
+#### Keuze
 
-De provisioning die wij nodig hebben is Directory Provisioning aangezien we onze Active Directory willen synchroniseren met de cloud. 
+Federation zal zeker geen optie zijn voor Dataline. Het is lastig om op te zetten en is overbodig. De andere methoden passen beter en zijn gemakkelijker. De Leaked credentials report zou een feature zijn die van pas zou kunnen komen. Daarom dat we zeker Password Hash Sync moeten hebben.
 
-Er zijn 3 opties waar tussen we kunnen kiezen bij **Directory Provisioning**.
+Dat geeft ons nog 2 keuzes:
+
+- **Password Hash Sync**
+- **Pass-through Auth + Password Hash Sync**
+
+Pass-through Auth + Password Hash Sync zo ideaal zijn maar het laat ons niet toe om de Cloud Sync Agent te gebruiken. Dit is iets wat later nog aan bod komt maar daarom gaat onze keuze naar **Password Hash Sync**.
+
+
+
+## User en group provisioning
+
+Provisioning is het process die automatisch gebruikers gaat aanmaken, verwijderen en up to date houden. Wij willen onze Active Directory synchroniseren met Azure AD. 
+
+Er zijn 3 opties waar tussen we kunnen kiezen om dit te gaan doen:
 
 | Optie  | Beschrijving |
 | :---: | :--- |
@@ -51,7 +92,7 @@ Er zijn 3 opties waar tussen we kunnen kiezen bij **Directory Provisioning**.
 | Azure AD connect cloud sync | Nieuwste optie support niet alle senarios maar de meeste, zeer snel en makkelijk op te zetten. Hoge availability.  Is lightweight dus geen nood aan een sterke server voor de synchronisatie. |
 
 
-#### Verschillen
+### Verschillen
 
 De Identity manager zullen we zeker niet gebruiken. Dan ligt de keuze nog tussen de **Connect Sync** en **Connect Cloud Sync**. Hier zetten we enkele voor- en nadelen op een rij van beide.
 | Feature                                       | Connect Sync | Cloud Sync |
@@ -68,3 +109,6 @@ De Identity manager zullen we zeker niet gebruiken. Dan ligt de keuze nog tussen
 Er is niet echt een goede server om de Connect Sync server te runnen en extra features die we krijgen bij Connect Sync niet echt nodig zijn. De belangrijkste feature was password writeback en deze word ondersteunt door beide. Daarom gaat de voorkeur naar de Cloud Sync methode.
 
 Een volledige lijst met alle verschillen tussen de 2 kun je vinden in de Microsoft Docs [hier](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/what-is-cloud-sync#comparison-between-azure-ad-connect-and-cloud-sync)
+
+
+## Soft- en Hardmatch
