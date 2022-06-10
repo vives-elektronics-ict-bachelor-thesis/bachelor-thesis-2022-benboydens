@@ -15,7 +15,7 @@ module.exports = {
       '/introduction/',
       '/eerste-stappen',
       '/huidige-omgeving',
-      '/domain-controller',
+      '/active-directory',
       '/microsoft-azure',
       '/confluence',
       '/mail-server',
