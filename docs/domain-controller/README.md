@@ -1,3 +1,7 @@
 # Domain Controller
 
-TODO ...
+## Active Directory
+
+## OU-structuur
+
+## LDAP

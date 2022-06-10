@@ -87,14 +87,15 @@ Er zijn 3 opties waar tussen we kunnen kiezen om dit te gaan doen:
 
 | Optie  | Beschrijving |
 | :---: | :--- |
-| Microsoft Identity manager | Oorspronkelijk niet gemaakt voor hybrid AD management, beperkte functionaliteit, **NIET** aanbevolen |
-| Azure AD connect sync  | Veel support en is robust, zeker een optie. Kan moeilijk zijn om te configureren en kostelijk om te onderhouden. Heeft ook een grote investering nodig op vlak van infrastructuur (sterke server nodig voor synchronisatie). **Sql server nodig voor grote deployments**. |
-| Azure AD connect cloud sync | Nieuwste optie support niet alle senarios maar de meeste, zeer snel en makkelijk op te zetten. Hoge availability.  Is lightweight dus geen nood aan een sterke server voor de synchronisatie. |
+| **Microsoft Identity manager** | Oorspronkelijk niet gemaakt voor hybrid AD management, beperkte functionaliteit, **NIET** aanbevolen |
+| **Azure AD connect sync**  | Veel support en is robust, zeker een optie. Kan moeilijk zijn om te configureren en kostelijk om te onderhouden. Heeft ook een grote investering nodig op vlak van infrastructuur (sterke server nodig voor synchronisatie). |
+| **Azure AD connect cloud sync** | Nieuwste optie support niet alle senarios maar de meeste, zeer snel en makkelijk op te zetten. Hoge availability.  Is lightweight dus geen nood aan een sterke server voor de synchronisatie. |
 
 
 ### Verschillen
 
 De Identity manager zullen we zeker niet gebruiken. Dan ligt de keuze nog tussen de **Connect Sync** en **Connect Cloud Sync**. Hier zetten we enkele voor- en nadelen op een rij van beide.
+
 | Feature                                       | Connect Sync | Cloud Sync |
 | :-------------------------------------------: | :----: | :----: |
 | Pass-through authentication (PTA) Support     |   ✔️   |   ❌   |
@@ -111,4 +112,57 @@ Er is niet echt een goede server om de Connect Sync server te runnen en extra fe
 Een volledige lijst met alle verschillen tussen de 2 kun je vinden in de Microsoft Docs [hier](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/what-is-cloud-sync#comparison-between-azure-ad-connect-and-cloud-sync)
 
 
+
 ## Soft- en Hardmatch
+
+Een aantal werknemers van Dataline hebben nu 2 accounts:
+
+- Een Office 365 account (opgeslagen in Azure AD)
+- Een on premise Active Directory account
+
+Deze accounts zullen gesynchroniseerd moeten worden met elkaar. Maar hoe weet de synchronisatie agent welke accounts overeen komen met elkaar? Dit gebeurt aan de hand van een **Soft- of Hardmatch**.
+
+De Office 365 accounts zijn belangrijk omdat die gebruikt worden om licenties aan gebruikers toe te kennen (bv Word). Als er iets misloopt bij het matchen van de 2 accounts zal er een nieuw account aangemaakt worden. Dat zorgt ervoor dat de licentie niet zal toegekend zijn voor die persoon.
+
+### Softmatch
+
+Bij een soft match gaat er gekeken worden naar 2 attributen van een gebruiker. 
+
+- **proxyAddresses**
+- **userPrincipalName** 
+
+Het attribuut **proxyAddresses** bestaat uit meerdere delen. Hier zal er enkel naar het SMTP gedeelde gekeken worden wat neer komt op de email van de gebruiker.
+
+De **userPrincipalName** komt neer de systeem representatie van een gebruiker in een email formaat. Meestal komt dit overeen met het email address van de gebruiker maar niet altijd!
+
+### Hardmatch
+
+Bij een hard match gaat er gekeken worden naar een enkel attribuut. Namelijk **sourceAnchor/immutableID**. Dit is een soort identifier die uniek is voor elke gebruiker.
+
+
+### Idfix
+
+Om zeker te zijn dat er geen problemen zouden voorkomen bij het synchroniseren raad Microsoft aan om de idFix tool te gebruiken.  Het zal mogelijke problemen gaan opsporen die kunnen optreden bij synchronisatie naar de cloud. Het checkt voor duplicates, missing attributes, en rule violations.
+
+
+## Uitvoering
+
+Dan wordt het tijd om de cloud sync agent te gaan installeren op de nieuwe domain controller. Dit gebeurt gewoon via een installer die je kan downloaden van de Azure AD web interface. Er wordt gecontroleerd voor problemen met de gebruikeraccounts met de idFix tool. De tool vindt geen problemen, dus kan de synchronisatie starten.
+
+### Problemen Softmatch
+
+Voor dat we de synchronisatie starten laat de web interface van Azure AD ons toe om eerst een enkele gebruiker te syncen als test. We proberen eens een enkele gebruiker te synchroniseren maar er loopt iets mis! We zien dat er een nieuwe gebruiker wordt aangemaakt en dat de oude gebruiker blijft bestaan zonder dat die gesynchroniseerd is.
+
+![Azure AD screenshot](./img/softmatch-problem.png)
+
+De reden dat hier is misloopt is omdat het gebruiker account een admin role heeft toegekend.
+
+![Global admin role](./img/role-azure-ad.png)
+
+Microsoft zegt zelf:
+
+> Azure AD Connect isn't allowed to soft match a user object from on-premises AD with a user object in Azure AD that has an administrative role assigned to it. [Link](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/tshoot-connect-sync-errors#existing-admin-role-conflict)
+
+Dit wordt gedaan voor de veiligheid omdat het matching van gebruikers automatisch gebeurt en je dus geen controle hebt over wie het zal matchen. Je wilt zeker niet per ongeluk een admin role gaan toekennen aan een gebruiker die het niet nodig heeft. Dus voor veiligheids redenen laten ze het niet toe.
+
+Dit is snel opgelost omdat we gewoon die role kunnen weg doen van elke gebruiker. Na dit te doen werkte de synchronisatie zoals verwacht.
