@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Place title here',
+  title: 'Bachelorproef Ben Boydens',
   description: 'Place a description here',
   themeConfig: {
     logo: '/vives-logo.png',

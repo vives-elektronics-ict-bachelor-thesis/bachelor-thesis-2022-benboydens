@@ -3,21 +3,26 @@
 Dataline zelf heeft al een Office 365. Dat is een online cloud omgeving die allerlei services zal aanbieden. Het word gebruikt om bijvoorbeeld Office Lisencies voor word, excel en powerpoint toe te kennen aan gebruikers. Deze gebruikers worden opgeslagen in een Azure AD.
 
 Met de huidige implemtatie hebben gebruikers dan 2 accounts:
-- **Een Office 365 account in de cloud**
+- **Een Azure AD account in de cloud**
 - **Een on premise Active Directory account**
 
 De 2 accounts hebben aparte wachtwoorden. Dit kan ambetant zijn voor gebruikers. Ook om de huidige omgeving te brengen naar de cloud moeten deze accounts gesynchroniseerd worden. Als de accounts gesynchroniseerd zijn dan kunnen we de accounts in Azure AD gaan gebruiken om de gebruikers te auhenticeren in de cloud. We kunnen dan deze accounts gebruiken met andere applicaties die werken in de cloud.
 
 We zullen een plan moeten bedenken om de accounts te gaan synchroniseren. Kijken wat onze opties zijn en kijken welke we zullen gaan implementeren.
 
-## Azure AD synchronisatie
+## Azure AD
 
-Microsoft geeft ons een heleboel mogelijkheden om dit probleem aan te pakken. Hier zullen we de stappen overlopen om tot de juiste conclusie te komen.
+Azure Active Directory (Azure AD) is een identiteits- en toegangsbeheerservice in de cloud. Het helpt om werknemers toegang te geven tot externe resources zoals Office 365 en andere cloud toepassingen.
+
+![Azure AD diagram](./img/azure-ad-diagram.png)
+
+Zoals je kan zien in de figuur dient Azure AD als een centrale plek die dient om de gebruiker accounts overal te verspreiden. Wat wij moeten gaan realiseren is de pijl tussen de **on-premises** en **Azure AD**.
+Microsoft geeft ons een heleboel manieren om dit probleem aan te pakken. Hier zullen we de stappen overlopen om tot de juiste conclusie te komen.
 
 ### Bepalen van Hybrid Identity
 
 
-Authenticatie in cloud is zeer belangrijk om te weten wie de applicatie gebruikt. Microsoft Er zijn 3 manieren om gebruikers te authenticeren in de cloud.
+Om gebruikers te gaan identificeren hebben we een oplossing nodig die werkt on premise maar ook in de cloud. Microsoft noemt zo'n oplossing een **Hybrid Identity**. Het zorgt dat we gebruikers kunnen gaan authenticeren en authoriseren zowel in de cloud als on premise. Er zijn 3 verschillende methoden om een hybrid identity te gaan implementeren:
 
 - Password hash sync
 - Pass-through authentication
@@ -45,13 +50,13 @@ Gebruikt een aparte vertrouwde server om de authenticatie te gaan doen. Mensen d
 
 ![img3](./img/federated-identity.png)
 
-Het grote voordeel van Federation is dat er enorm veel vrijheid is om de authenticatie te gaan doen. De andere 2 methoden zijn standaard methoden van microsoft die beperkte functionaliteit hebben. Zo kun je bijvoorbeeld met federation smartcard authenticatie implementeren.
+Het grote voordeel van Federation is dat er enorm veel vrijheid is om de authenticatie te gaan doen. De andere 2 methoden zijn standaard methoden van microsoft die beperkte functionaliteit hebben. Zo kun je bijvoorbeeld met federation smartcard authenticatie implementeren wat niet mogelijk is met de andere methoden.
 
 
 
 ## Hybrid Identity Keuze
 
-We kunnen onderstaande flowchart gebruiken die op de officiële Microsoft Docs staat. Deze kan ons helpen om een keuze te gaan maken.
+We kunnen onderstaande flowchart gebruiken die in de officiële Microsoft Docs staat. Deze kan ons helpen om een keuze te gaan maken.
 
 ![Flowchart Bepalen identity](./img/azure-ad-authn-image.png)
 
@@ -68,7 +73,7 @@ Dit heeft nog een ander voordeel en dat is dat we Password hash sync kunnen gebr
 
 #### Keuze
 
-Federation zal zeker geen optie zijn voor Dataline. Het is lastig om op te zetten en is overbodig. De andere methoden passen beter en zijn gemakkelijker. De Leaked credentials report zou een feature zijn die van pas zou kunnen komen. Daarom dat we zeker Password Hash Sync moeten hebben.
+Federation zal zeker geen optie zijn voor Dataline. Het is lastig om op te zetten en is overbodig, een andere methode zou beter passen. De Leaked credentials report zou een feature zijn die van pas zou kunnen komen. Daarom dat we zeker Password Hash Sync moeten hebben.
 
 Dat geeft ons nog 2 keuzes:
 
@@ -107,7 +112,7 @@ De Identity manager zullen we zeker niet gebruiken. Dan ligt de keuze nog tussen
 | Multiple active agents for high availability  |   ❌   |   ✔️   |
 | Lightweight agent installation model          |   ❌   |   ✔️   |
 
-Er is niet echt een goede server om de Connect Sync server te runnen en extra features die we krijgen bij Connect Sync niet echt nodig zijn. De belangrijkste feature was password writeback en deze word ondersteunt door beide. Daarom gaat de voorkeur naar de Cloud Sync methode.
+Er is niet echt een goede server om de Connect Sync server te runnen en extra features die we krijgen bij Connect Sync zijn niet echt nodig zijn. De belangrijkste feature was password writeback en deze word ondersteunt door beide. Daarom gaat de voorkeur naar de Cloud Sync methode.
 
 Een volledige lijst met alle verschillen tussen de 2 kun je vinden in de Microsoft Docs [hier](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/what-is-cloud-sync#comparison-between-azure-ad-connect-and-cloud-sync)
 
@@ -115,9 +120,9 @@ Een volledige lijst met alle verschillen tussen de 2 kun je vinden in de Microso
 
 ## Soft- en Hardmatch
 
-Een aantal werknemers van Dataline hebben nu 2 accounts:
+Werknemers van Dataline hebben nu 2 accounts:
 
-- Een Office 365 account (opgeslagen in Azure AD)
+- Een Azure AD account voor Office 365
 - Een on premise Active Directory account
 
 Deze accounts zullen gesynchroniseerd moeten worden met elkaar. Maar hoe weet de synchronisatie agent welke accounts overeen komen met elkaar? Dit gebeurt aan de hand van een **Soft- of Hardmatch**.
@@ -151,7 +156,7 @@ Dan wordt het tijd om de cloud sync agent te gaan installeren op de nieuwe domai
 
 ### Problemen Softmatch
 
-Voor dat we de synchronisatie starten laat de web interface van Azure AD ons toe om eerst een enkele gebruiker te syncen als test. We proberen eens een enkele gebruiker te synchroniseren maar er loopt iets mis! We zien dat er een nieuwe gebruiker wordt aangemaakt en dat de oude gebruiker blijft bestaan zonder dat die gesynchroniseerd is.
+Voor dat we de synchronisatie starten laat Azure AD ons toe om eerst een enkele gebruiker te syncen als test. We proberen eens een enkele gebruiker te synchroniseren maar er loopt iets mis. We zien dat er een nieuwe gebruiker wordt aangemaakt en dat de oude gebruiker blijft bestaan zonder dat die gesynchroniseerd is.
 
 ![Azure AD screenshot](./img/softmatch-problem.png)
 
@@ -163,6 +168,6 @@ Microsoft zegt zelf:
 
 > Azure AD Connect isn't allowed to soft match a user object from on-premises AD with a user object in Azure AD that has an administrative role assigned to it. [Link](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/tshoot-connect-sync-errors#existing-admin-role-conflict)
 
-Dit wordt gedaan voor de veiligheid omdat het matching van gebruikers automatisch gebeurt en je dus geen controle hebt over wie het zal matchen. Je wilt zeker niet per ongeluk een admin role gaan toekennen aan een gebruiker die het niet nodig heeft. Dus voor veiligheids redenen laten ze het niet toe.
+Dit wordt gedaan voor de veiligheid omdat het matching van gebruikers automatisch gebeurt en je dus geen controle hebt over wie het zal matchen. Je wilt zeker niet per ongeluk een admin role gaan toekennen aan een gebruiker die het niet nodig heeft. Dus voor veiligheidsredenen laten ze het niet toe.
 
 Dit is snel opgelost omdat we gewoon die role kunnen weg doen van elke gebruiker. Na dit te doen werkte de synchronisatie zoals verwacht.
