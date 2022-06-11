@@ -32,15 +32,15 @@ OU of Organisational Unit is een manier om Active Directory objecten te gaan gro
 
 ### Huidige structuur
 
-De huidige structuur van Dataline werkt nog niet met OU's en men zou graag overstappen naar een duidelijke OU-structuur. Nu wordt nog een oude structuur gebruikt die ziet er als volgt uitziet.
+De huidige structuur van Dataline werkt nog niet met OU's en men zou graag overstappen naar een duidelijke OU-structuur. Nu wordt nog een oude structuur gebruikt die er als volgt uitziet.
 
 ![OU old](./img/ou-old.png)
 
-Je kan zien dat 2 mappen gebruikt worden. Users wordt gebruikt voor gebruikers en groupen terwijl computers gebruikt gebruikt wordt voor computers en servers. Deze structuur was de oude manier van werken. Alle objecten zitten samen en er is geen structuur in de indeling.
+Je kan zien dat 2 mappen gebruikt worden genaamd Users en Computers. Dit zijn 2 standaard directories die in elke domain controller aanwezig zijn. Users wordt gebruikt voor gebruikers en groepen terwijl computers gebruikt gebruikt wordt voor computers en servers. Dit is een oude manier van werken waar alle objecten samen zitten en er is geen structuur in de indeling.
 
 ### Nieuwe structuur
 
-De nieuwe manier van werken zal OU's gebruiken om objecten te groeperen per soort, per afdeling of per locatie. Op die manier is het gemakkelijker werken en zijn er meer mogelijkheden om gebruikers te beheren. De nieuwe structuur ziet er als volgt uit. De oranje toppen stellen OU's voor.
+De nieuwe manier van werken zal OU's gebruiken om objecten te groeperen per soort, per afdeling en per locatie. Op die manier is het gemakkelijker werken en zijn er meer mogelijkheden om gebruikers te beheren. De nieuwe structuur ziet er als volgt uit. De oranje toppen stellen OU's voor.
 
 ![OU new](./img/ou-new.png)
 
@@ -52,11 +52,50 @@ Dit is niet de volledige structuur, maar het geeft een beeld wat het zou moeten 
 
 ### Problemen
 
-Uitleg over waarom mensen naar de nieuwe structuur verplaatsen problemen kan geven.
+We moeten overstappen naar de nieuwe structuur maar dit brengt enkele problemen met zich mee. Vele applicaties en services gebruiken nog de oude structuur en kunnen mogelijks niet meer functioneren als we overschakkelen op de nieuwe structuur. De reden hiervoor is omdat vele applicaties enkel in de Users directory kijken voor gebruikers en groepen.
+
+Enkele voorbeelden van applicaties en services die nog de oude structuur gebruiken:
+
+- Confluence
+- Telefonie servers
+- De printers
+
+De manier waarop die applicaties gaan communiceren met de domain controller is aan de hand van het **LDAP protocol**.
 
 ## LDAP
 
-Wat is LDAP en waarom is het nodig?
+LDAP of **Lightweight Directory Access Protocol** is een netwerkprotocol voor het opvragen en onderhouden van een directory service over TCP/IP. Het is een open standaard die door veel applicaties ondersteund wordt. Apps en services van Dataline gebruiken het als een interface om gegevens op te vragen van Active Directory. 
 
-Hoe wordt LDAP gebruikt in Dataline.
+Als voorbeeld nemen we eens de printers van Dataline. Die hebben de optie om een document in te scannen en door te mailen naar een werknemer. De printer zelf zal een LDAP query gaan uitvoeren op de domain controller om alle gebruikers op te halen. Die query zal er als volgt uitzien.
+
+- **LDAP query root**: `CN=Users,DC=dataline,DC=eu`
+- **LDAP query**: `(objectclass=user)(objectCategory=person)`
+
+De **root** is de plek waar de query zal uitgevoerd worden en hier wordt dit de Users map. Dat wil zeggen dat we enkel objecten vinden die in de Users map zitten of in een submap ervan. De **query** zelf zal zoeken naar alle gebruikers objecten.
+
+### Nieuwe Queries
+
+Om de applicaties klaar te maken voor de nieuwe structuur moeten we dus bij elke applicatie de **query root** aanpassen zodat we niet meer enkel zoeken in de Users map. De **LDAP query** zelf heeft geen verandering nodig want we zoeken nog steeds naar dezelfde objecten in AD.
+
+Bij de printers wordt de query dan uiteindelijk:
+
+- **LDAP query root**: `OU=Dataline Users,DC=dataline,DC=eu`
+- **LDAP query**: `(objectclass=user)(objectCategory=person)`
+
+
+### Voorbeelden
+
+Nog enkele voorbeelden van LDAP queries:
+
+#### Gebruikers zonder email
+`(objectcategory=person)(objectCategory=Person)(!mail=*)`
+
+#### Alle admin accounts
+`(objectClass=user)(objectCategory=Person)(adminCount=1)`
+
+#### Alle lege groepen oplijsten
+`(objectCategory=group)(!member=*)`
+
+#### Alle gebruikers lid van een groep
+`(objectclass=user)(MemberOf=CN=Groep naam,CN=Users,DC=dataline,DC=eu)`
 
