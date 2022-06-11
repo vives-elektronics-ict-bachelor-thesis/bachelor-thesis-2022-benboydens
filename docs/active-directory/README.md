@@ -52,19 +52,15 @@ Dit is niet de volledige structuur, maar het geeft een beeld wat het zou moeten 
 
 ### Problemen
 
-We moeten overstappen naar de nieuwe structuur maar dit brengt enkele problemen met zich mee. Vele applicaties en services gebruiken nog de oude structuur en kunnen mogelijks niet meer functioneren als we overschakkelen op de nieuwe structuur. De reden hiervoor is omdat vele applicaties enkel in de Users directory kijken voor gebruikers en groepen.
-
-Enkele voorbeelden van applicaties en services die nog de oude structuur gebruiken:
-
-- Confluence
-- Telefonie servers
-- De printers
+We moeten overstappen naar de nieuwe structuur maar dit brengt enkele problemen met zich mee. Vele applicaties en services gebruiken nog de oude structuur en kunnen mogelijks niet meer functioneren als we overschakkelen op de nieuwe structuur. De reden hiervoor is omdat vele applicaties enkel in de Users directory zoeken naar gebruikers en groepen.
 
 De manier waarop die applicaties gaan communiceren met de domain controller is aan de hand van het **LDAP protocol**.
 
 ## LDAP
 
 LDAP of **Lightweight Directory Access Protocol** is een netwerkprotocol voor het opvragen en onderhouden van een directory service over TCP/IP. Het is een open standaard die door veel applicaties ondersteund wordt. Apps en services van Dataline gebruiken het als een interface om gegevens op te vragen van Active Directory. 
+
+![img](./img/ldap.png)
 
 Als voorbeeld nemen we eens de printers van Dataline. Die hebben de optie om een document in te scannen en door te mailen naar een werknemer. De printer zelf zal een LDAP query gaan uitvoeren op de domain controller om alle gebruikers op te halen. Die query zal er als volgt uitzien.
 
@@ -83,7 +79,7 @@ Bij de printers wordt de query dan uiteindelijk:
 - **LDAP query**: `(objectclass=user)(objectCategory=person)`
 
 
-### Voorbeelden
+## Voorbeelden
 
 Nog enkele voorbeelden van LDAP queries:
 
