@@ -1,7 +1,7 @@
 ---
 home: true
 heroText: Vernieuwen van de on-premise infrastructuur en voorbereiden van migratie naar de cloud
-heroImage: /vives-logo.png
+heroImage: /vives-logo-smile.png
 tagline: door Ben Boydens
 actions:
   - text: Lees verder →
@@ -9,6 +9,8 @@ actions:
     type: primary
 footer: Bachelorproef aangeboden tot het behalen van het diploma van Bachelor in de elektronica-ICT. Deze eindverhandeling was een examen. De tijdens de verdediging geformuleerde opmerkingen werden niet opgenomen."
 ---
+
+<!-- TODO: Merk op dat hierboven ook de heroImage het nieuwe logo gebruikt! -->
 
 ## Abstract
 
@@ -19,19 +21,25 @@ footer: Bachelorproef aangeboden tot het behalen van het diploma van Bachelor in
 Deze eindverhandeling werd geschreven onder begeleiding van volgende mentoren:
 
 * **Philip Van Isacker**
-  * ICT & Senior Developper
-  * email indien toegestaan
+  * ICT & Senior Developper <!-- TODO: Typo: Developer -->
+  * email indien toegestaan <!-- TODO: Als email niet mag worden getoond best dit weg doen -->
 
 * **Nick Legroe**
-  * ICT & Senior Developper
-  * email indien toegestaan
+  * ICT & Senior Developper <!-- TODO: Typo: Developer -->
+  * email indien toegestaan <!-- TODO: Als email niet mag worden getoond best dit weg doen -->
 
 <!-- Plaats enkel het mail-adres van jouw promotor(en) indien je hier uitdrukkelijk toestemming voor gekregen hebt. -->
 
 * **Nico De Witte**
-  * Project employee - Lecturer at VIVES University College
+  * Project employee - Lecturer at VIVES University College <!-- TODO: Vervangen door: Projectmedewerker/Lector - VIVES Hogeschool -->
   * [nico.dewitte@vives.be](mailto:nico.dewitte@vives.be)
 
 ## Over de auteur
 
 *Vertel kort iets over jezelf.*
+
+<!-- TODO: Volgend sectie dient er ook nog in te komen -->
+
+## Digitale versie
+
+De digitale versie van deze thesis kan worden geraadpleegd via [https://thesis-dataline-ben-2022.netlify.app](https://thesis-dataline-ben-2022.netlify.app).
