@@ -65,8 +65,7 @@ Maar met vSAN kun je de storage gaan abstraheren zodat je een enkele centrale da
 
 ![img4](./img/datastore-vSAN-2.png)
 
-Er zijn een heleboel vSAN opties waaruit we kunnen kiezen. Veel gebruikte opties zijn bijvoorbeeld: **VMWare vSAN, Starwind vSAN en Microsoft Storage Spaces Direct**. Voorkeur gaat naar VMWare aangezien deze gemakkelijk te gebruiken is, maar Starwind vSAN werkt ook met VMWare. Microsoft Storage Spaces Direct (S2D) werkt dan weer met Hyper-V en Windows datacenter. We bekijken eens de verschillende opties.
-
+Er zijn een heleboel vSAN opties waaruit we kunnen kiezen. Veel gebruikte opties zijn bijvoorbeeld: **VMWare vSAN, Starwind vSAN en Microsoft Storage Spaces Direct**. Voorkeur gaat naar VMWare aangezien deze gemakkelijk te gebruiken is, maar Starwind vSAN werkt ook met ESXi. Microsoft Storage Spaces Direct (S2D) werkt dan weer met Hyper-V en Windows datacenter. We bekijken eens de verschillende opties.
 
 
 ## VMWare vSAN
