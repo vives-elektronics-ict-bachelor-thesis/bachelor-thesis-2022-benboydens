@@ -1,13 +1,23 @@
 # Introductie
 
-Heel wat bedrijven gebruiken nog lokale servers om hun applicaties en data op te slaan. Dit geeft hun veel controle over wat er gebeurt met hun IT omgeving, maar heeft ook zijn nadelen. Een alternatief hiervoor is **Cloud computing** en het wordt steeds populairder. Met cloud computing is het gemakkelijker om de omgeving te vernieuwen en klaar maken voor de toekomst. Ook is er geen nood meer om dure servers en apparatuur aan te kopen.
+Heel wat bedrijven gebruiken nog lokale servers om hun applicaties en data op te slaan. Dit geeft hen veel controle over wat er gebeurt met hun IT omgeving, maar heeft ook zijn nadelen. Zoals het feit dat het bedrijf een team moet samen stellen om dit op te onderhouden. Ook kan het zeer kostelijk zijn om uit te breiden en nieuwe apparatuur aan te kopen. Een alternatief hiervoor is **Cloud computing** en het wordt steeds populairder. [Sumina, 2022](https://www.cloudwards.net/cloud-computing-statistics/).
 
-Een ander belangrijk aspect is fout tolerancy. Het kan altijd gebeuren dat een applicatie of service plots niet meer werkt. In dat geval moet er een alternatief zijn om snel de services terug up and running te krijgen. 
-Er moet dus vermeden worden dat er een **Single Point Of Failure** bestaat. Zodat wanneer één iets kapot gaat er direct een aternatief is die de taak kan overnemen. 
+<img src="./img/Cloud-Computing-Stats-By-the-Numbers.png" height="500" style="display: block;margin: 0 auto;border:1px solid gray"/>
 
-## Probleemstelling
+Een groot voordeel van Cloud computing is dat het zeer flexibel is. Werken in de cloud is veel simpeler om de omgeving up to date te houden en te gaan uitbreiden. Stel bijvoorbeeld dat we extra bandbreedte of storage nodig zouden hebben, dan kan de cloud direct aan die vraag voldoen, in plaats van een complexe (en dure) update van de IT-infrastructuur te ondergaan.
 
-Vele bedrijven willen graag hun IT omgeving vernieuwen. Het opslaan van data en onderhouden van applicaties kan een dure operatie zijn. Daarom dat een bedrijf best eens kijkt naar de opties die ter beschikking staan. Over het algemeen zijn er 3 opties waar tussen een bedrijf kan kiezen om hun data op te slaan:
+Aan de andere kant kan cloud computing duur zijn, elke maand moet er een som betaalt worden en na een lange periode lopen die kosten op. Wanneer er lokaal gewerkt is dit niet, daarom dat lokaal werken op lange termijn goedkoper is. Het is dus zeer belangrijk om te kijken welke applicaties mogen blijven en welke beter naar de cloud vertrekken. Hieronder kun je een vergelijking zien van de kost van de 2 over de tijd. [Fisher, 2018](https://www.scirp.org/html/7-2121263_87661.htm)
+
+<img src="./img/cloud_vs_on_prem_cost.png" height="350" style="display: block;margin: 0 auto;"/>
+
+Een ander belangrijk aspect is fouttolerantie. Het kan altijd gebeuren dat een applicatie of service plots niet meer werkt. In dat geval moet er een alternatief zijn om snel de services terug up and running te krijgen. 
+Er moet dus vermeden worden dat er een **Single Point Of Failure** bestaat. Zodat wanneer één iets kapot gaat er direct een alternatief is die de taak kan overnemen. Een manier om applicaties en data fout tolerant te maken zou kunnen zijn om alles meerdere malen te gaan opslaan. Dit noemt men in het Engels ook **Redundancy** (overbodigheid).
+
+Bijvoorbeeld met een RAID configuratie kun je data gaan dupliceren over meerdere harde schijven. Dit zorgt dat de je altijd een kopie hebt.
+
+<img src="./img/Raid1.jpg" height="300" style="display: block;margin: 0 auto;"/>
+
+Er zijn 3 opties waar tussen een bedrijf kan kiezen om hun applicaties en data op te slaan. 
 
 - On Premise
 - De Cloud
@@ -15,30 +25,55 @@ Vele bedrijven willen graag hun IT omgeving vernieuwen. Het opslaan van data en 
 
 Elke van deze opties heeft zijn voor- en nadelen. Wat is nu de beste oplossing qua prijs, gebruikersgemak en beveiliging? Dat is wat ik zal proberen te beantwoorden in deze analyse.
 
+
+### On premise
+
+Alle data en applicaties worden opgeslagen op lokale servers in het bedrijf. Meestal wordt dit afgesloten van de buiten wereld en zijn de toepassingen enkel beschikbaar op de werkvloer. Dit gemakkelijk omdat alles heel dichtbij staat en je veel vrijheid hebt wat je doet met de servers.
+
+### De Cloud
+
+De cloud of cloud computing is een dienst die aangeboden wordt door een bedrijf om software of hardware ter beschikking te stellen over het internet. De cloud provider zorgt voor het onderhoud en kosten van de servers. Gebaseerd op de noden van je bedrijf kun je dan een aantal servers huren.
+
+### Hybride Oplossing
+
+Met een hybride oplossing gaan we gedeeltelijk in de cloud werken en ook on premise. Het kan soms zijn dat er een applicatie draait in de cloud maar verbonden is met een server on premise.
+
+![cloud vs on prem](./img/cloud_vs_on_prem.png)
+
+
 ## Dataline Solutions nv
 
-Dataline is een bedrijf die actief is in de print industrie en een de ontwikkelaar van software. Multipress is één van hun applicaties, het digitaliseerd het volledige process van drukkerijen. Van het eerste contact met de klant tot het controleren van de magezijn, en zelf de facturen opmaken. Dataline focust ook op het helpen van de klanten en probeert zich steeds uit te breiden. Multipress is de meest populaire MIS/ERP software voor de print industrie in heel Europa!
+Dataline is een bedrijf dat actief is in de print industrie en een ontwikkelaar van software. Multipress is één van hun applicaties, het digitaliseert het volledige process van drukkerijen. Van het eerste contact met de klant tot het controleren van de magazijn, en zelf de facturen opmaken. Dataline focust ook op het helpen van de klanten en probeert zich steeds uit te breiden. Multipress is de meest populaire MIS/ERP software voor de print industrie in heel Europa.
 
-Dataline zelf heeft in hun hoofdkantoor in Loppem een hele IT infrastructuur. Daarbij horen een heleboel applicaties die gebruikt worden door de werknemers. Sommige applicaties die worden niet meer ondersteund en moeten naar de cloud. Daarom moet ik onderzoeken welke applicatie's best naar de cloud verplaatsen en welke best nog on premise blijven.
+Dataline zelf heeft in hun hoofdkantoor in Loppem een hele IT infrastructuur. Daarbij horen een heleboel applicaties die gebruikt worden door de werknemers. Sommige applicaties die worden niet meer ondersteund en moeten naar de cloud. Daarom moet er onderzocht worden welke applicatie's best naar de cloud verplaatsen en welke best nog on premise blijven.
 
-Dit is zeer belangrijk voor dataline voor de toekomst en de kostprijs van de IT infrastructuur. Hoe moet hun infrastructuur veranderen om up to date te blijven. Cloud computing kan ook de kostprijs verlagen en gebruikers gemak verhogen.
+Dit is zeer belangrijk voor Dataline voor de toekomst en de kostprijs van de IT infrastructuur. Hoe moet hun infrastructuur veranderen om up to date te blijven. Cloud computing kan ook de kostprijs verlagen en gebruikers gemak verhogen.
 
 ## Doelstelling
 
-Een analyse maken van de huidige It omgeving, kijken hoe we die kunnen verbeteren en een plan opstellen voor de toekomst. Er moet vergeleken worden van de kost. De voor- en nadelen van de verschillende opties opsommen en komen met een besluit.
+Dit is een complex probleem waar een analyse gemaakt moet worden van de huidige IT omgeving, kijken hoe we die kunnen verbeteren en een plan opstellen voor de toekomst.
 
-De gevolgde methode is de volgende op basis van onderzoek enzo...
+In de eerste fase bekijken we de verschillende applicaties die Dataline heeft. We maken een lijst op van alle servers die in de huidige omgeving gebruikt worden. We kijken naar de specificaties van de servers, dat is het aantal CPU's, de hoeveelheid RAM en de hoeveelheid storage. Van deze lijst kijken we welke applicaties naar de cloud moeten en welke die beter on premise zouden blijven.
 
-*De inleiding kan volgende delen bevatten:*
-- *Probleemstelling*
-  - *wat is de centrale vraag waarop het eindwerk een antwoord wil bieden;*
-  - *wat is het belang van dit project/onderzoek (maatschappelijk, voor het stagebedrijf…);*
-  - *andere onderzoeken (wat is er al onderzocht, wat is het verband met jouw probleemstelling en wat is er anders aan jouw onderzoek/project);*
-- *Voorstelling van het bedrijf*
-  - *korte beschrijving van de bedrijfsactiviteit;*
-  - *situering van het eindwerk binnen de bedrijfsactiviteit;*
-  - *belang van het eindwerk voor het bedrijf.*
-- *Doelstelling*
-  - *Wat is het einddoel;*
-  - *de gevolgde methode en/of stappenplan.*
-  - *beperkingen. Hoe heb je het onderwerp afgebakend en waarom?*
+In de tweede fase wordt er onderzoek gedaan naar elke applicatie en er wordt gekeken naar de mogelijkheid om naar de cloud te gaan. Verschillende cloud providers worden bekeken en er wordt een onderzoek gedaan op wat de beste mogelijkheid is qua prijs efficiëntie. Ook wordt er gekeken naar het migratie process naar de cloud. Hoe moet de data naar de cloud gebracht worden en kunnen er problemen optreden.
+
+In de derde fase wordt er gekeken naar de applicaties die lokaal moeten blijven. Voor die applicaties moet er ook gekeken worden naar de storage ervan zodat die applicaties fout tolerant zijn. Er zijn hier vele mogelijke aanpakken voor, welke is geschikt voor Dataline en past in hun budget?
+
+In de laatste fase word een test opstelling gemaakt op vlak van storage. Dit om te kijken of deze storage optie wel goed is voor de prijs.
+
+
+
+<!--
+
+Ik denk dat je inleiding nog eens serieus onder handen moet worden genomen. Algemeen geldt dat je inleiding de lezer moet aanzetten om verder te lezen. Het is een van de belangrijkste hoofdstukken van je thesis. Het moet een goede context scheppen van het bedrijf, wat ze doen, wat hun probleem was, wat de mogelijkheden waren, wat de doelstellingen waren.
+
+De inleiding moet lezen als een vlot verhaal.
+
+Je gebruikt ook heel wat gevoelsuitspraken. Dit is een technische tekst. Je kan niet zomaar zeggen dat een technologie heel wat nadelen heeft en het daar bij houden. Geef aan wat de voor- en nadelen zijn van de verschillende strategieën. Als je ergens vergelijkende (white)papers vind kan je daar naar verwijzen.
+
+Niet iedereen is een expert in cloud. Probeer in dit hoofdstuk ook de lezers die er weinig van weten mee te hebben door op hoger niveau hen al in te lichten.
+
+Let meer op je taal. Het is een technisch document dat je schrijft. Geen persoonlijke vorm, letten op spellingsfouten, grammatica, ....
+
+De opmerkingen die ik hier geef gelden trouwens ook voor de rest van je thesis.
+-->

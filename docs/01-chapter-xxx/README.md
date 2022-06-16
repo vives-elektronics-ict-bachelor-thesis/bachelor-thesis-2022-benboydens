@@ -1,3 +1,5 @@
+<!-- TODO: Dit hoofdstuk mag er op het einde uit -->
+
 # Hoofdstuk titel XXX
 
 De indeling in hoofdstukken en verdere onderverdelingen moet eenvoudig, duidelijk en consequent zijn.
