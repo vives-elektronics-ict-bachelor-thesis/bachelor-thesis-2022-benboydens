@@ -1,7 +1,7 @@
 # Active Directory
 
 Active Directory is de naam die word gegeven aan de directory service van Microsoft voor een Windows Domain. Het komt inbegrepen bij meeste Windows Servers als een verzameling van services. Een Windows server die Active Directory draait is gekend als een Domain controller.
-
+<!-- TODO verhaal van wat active directory betekent voor Dataline, hoe wordt het nu gebruikt enzo aanvullen -->
 ## Domain Controller
 
 De domain controller is een Windows Server waar alle gebruikers en computers worden in opgeslagen. Het zal de gebruikers en computers gaan authenticeren en authorizeren in een Windows domain. Bijvoorbeeld als iemand inlogt met een windows computer die lid is van het domain dan zal de domain controller het ingegeven gebruikersnaam en wachtwoord controleren.
@@ -22,6 +22,7 @@ Dit zijn de services waarvoor een domain controller allemaal gebruikt wordt.
 
 ### Nieuwe Domain Controller
 
+<!--TODO Deze tekst wat herschrijven => eerste zin bv Een windows server versie van 2016 of later is nodig .... -->
 Om de synchronisatie naar de cloud te doen hebben we minsten een Windows Server van 2016 nodig. Domain controller DC1 voldoet hier niet aan en daarom moeten we een nieuwe domain controller gaan installeren. We geven die domain controller een logische naam **DC-LOPPEM**. Deze domain controller zal in het begin samen werken met DC1 en na een tijdje zal DC1 uitgeschakelt worden en neemt DC-LOPPEM de taak over. 
 
 ![DC dataline 2](./img/domaincontrollers-2.png)
