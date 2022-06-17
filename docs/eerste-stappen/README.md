@@ -1,6 +1,7 @@
 # Eerste stappen
 
-<!-- TODO dit hoofdstuk mag weg en moet verwerkt worden in de andere hoofdstukken -->
+<!-- TODO: Kan je dit verwerken in het hoofdstuk huidige omgeving. -->
+<!-- TODO: Je schrijfwijze hier is ook zoals een stage-verslag. Dient technisch schrijven te worden -->
 
 Hoe beginnen we hier nu precies aan? Dit is een complexe opdracht omdat er een heleboel verschillende dingen in rekening moeten gebracht worden. Om duidelijk te maken hoe we dit gaan doen moeten we beginnen bij het begin.
 

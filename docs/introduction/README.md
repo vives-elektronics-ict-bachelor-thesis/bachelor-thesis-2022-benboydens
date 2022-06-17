@@ -1,23 +1,26 @@
 # Introductie
 
+<!-- TODO: Vergeet niet om alle bronnen in je bibliografie te plaatsen -->
+
 Heel wat bedrijven gebruiken nog lokale servers om hun applicaties en data op te slaan. Dit geeft hen veel controle over wat er gebeurt met hun IT omgeving, maar heeft ook zijn nadelen. Zoals het feit dat het bedrijf een team moet samen stellen om dit op te onderhouden. Ook kan het zeer kostelijk zijn om uit te breiden en nieuwe apparatuur aan te kopen. Een alternatief hiervoor is **Cloud computing** en het wordt steeds populairder. [Sumina, 2022](https://www.cloudwards.net/cloud-computing-statistics/).
 
 <img src="./img/Cloud-Computing-Stats-By-the-Numbers.png" height="500" style="display: block;margin: 0 auto;border:1px solid gray"/>
 
-Een groot voordeel van Cloud computing is dat het zeer flexibel is. Werken in de cloud is veel simpeler om de omgeving up to date te houden en te gaan uitbreiden. Stel bijvoorbeeld dat we extra bandbreedte of storage nodig zouden hebben, dan kan de cloud direct aan die vraag voldoen, in plaats van een complexe (en dure) update van de IT-infrastructuur te ondergaan.
+Een groot voordeel van Cloud computing is dat het zeer flexibel is. Werken in de cloud is veel simpeler om de omgeving up to date <!-- TODO: up-to-date
+ --> te houden en te gaan uitbreiden. Stel bijvoorbeeld dat we <!-- TODO: geen persoonlijke vorm gebruiken. "Stel dat er nood is aan ..." --> extra bandbreedte of storage nodig zouden hebben, dan kan de cloud direct aan die vraag voldoen, in plaats van een complexe (en dure) update van de IT-infrastructuur te ondergaan.
 
-Aan de andere kant kan cloud computing duur zijn, elke maand moet er een som betaalt worden en na een lange periode lopen die kosten op. Wanneer er lokaal gewerkt is dit niet, daarom dat lokaal werken op lange termijn goedkoper is. Het is dus zeer belangrijk om te kijken welke applicaties mogen blijven en welke beter naar de cloud vertrekken. Hieronder kun je een vergelijking zien van de kost van de 2 over de tijd. [Fisher, 2018](https://www.scirp.org/html/7-2121263_87661.htm)
+Aan de andere kant kan cloud computing duur zijn, elke maand moet er een som betaalt worden en na een lange periode lopen die kosten op. Wanneer er lokaal gewerkt is dit niet, daarom dat lokaal werken op lange termijn goedkoper is. Het is dus zeer belangrijk om te kijken welke applicaties mogen blijven en welke beter naar de cloud vertrekken. Hieronder kun je <!-- TODO: De lezer niet aanspreken. In onderstaande figuur is te zien dat ... --> een vergelijking zien van de kost van de 2 over de tijd. [Fisher, 2018](https://www.scirp.org/html/7-2121263_87661.htm)
 
 <img src="./img/cloud_vs_on_prem_cost.png" height="350" style="display: block;margin: 0 auto;"/>
 
 Een ander belangrijk aspect is fouttolerantie. Het kan altijd gebeuren dat een applicatie of service plots niet meer werkt. In dat geval moet er een alternatief zijn om snel de services terug up and running te krijgen. 
-Er moet dus vermeden worden dat er een **Single Point Of Failure** bestaat. Zodat wanneer één iets kapot gaat er direct een alternatief is die de taak kan overnemen. Een manier om applicaties en data fout tolerant te maken zou kunnen zijn om alles meerdere malen te gaan opslaan. Dit noemt men in het Engels ook **Redundancy** (overbodigheid).
+Er moet dus vermeden worden dat er een **Single Point Of Failure** bestaat. Zodat wanneer één iets kapot gaat er direct een alternatief is die de taak kan overnemen. Een manier om applicaties en data fout tolerant <!-- TODO: fouttolerant --> te maken zou kunnen zijn om alles meerdere malen te gaan opslaan. Dit noemt men in het Engels ook **Redundancy** (overbodigheid).
 
-Bijvoorbeeld met een RAID configuratie kun je data gaan dupliceren over meerdere harde schijven. Dit zorgt dat de je altijd een kopie hebt.
+Bijvoorbeeld met een RAID configuratie kun je <!-- TODO: kan data worden gedupliceerd --> data gaan dupliceren over meerdere harde schijven. Dit zorgt dat de je <!-- TODO: dat er altijd een kopie wordt gemaakt --> altijd een kopie hebt.
 
 <img src="./img/Raid1.jpg" height="300" style="display: block;margin: 0 auto;"/>
 
-Er zijn 3 opties waar tussen een bedrijf kan kiezen om hun applicaties en data op te slaan. 
+Er zijn 3 opties waar tussen <!-- TODO: waartussen --> een bedrijf kan kiezen om hun applicaties en data op te slaan. 
 
 - On Premise
 - De Cloud
@@ -28,15 +31,15 @@ Elke van deze opties heeft zijn voor- en nadelen. Wat is nu de beste oplossing q
 
 ### On premise
 
-Alle data en applicaties worden opgeslagen op lokale servers in het bedrijf. Meestal wordt dit afgesloten van de buiten wereld en zijn de toepassingen enkel beschikbaar op de werkvloer. Dit gemakkelijk omdat alles heel dichtbij staat en je veel vrijheid hebt wat je doet met de servers.
+Alle data en applicaties worden opgeslagen op lokale servers in het bedrijf. Meestal wordt dit afgesloten van de buiten wereld <!-- TODO: buitenwereld --> en zijn de toepassingen enkel beschikbaar op de werkvloer. Dit <!-- TODO: is? --> gemakkelijk omdat alles heel dichtbij staat en je veel vrijheid hebt wat je doet met de servers.
 
 ### De Cloud
 
-De cloud of cloud computing is een dienst die aangeboden wordt door een bedrijf om software of hardware ter beschikking te stellen over het internet. De cloud provider zorgt voor het onderhoud en kosten van de servers. Gebaseerd op de noden van je bedrijf kun je dan een aantal servers huren.
+De cloud of cloud computing is een dienst die aangeboden wordt door een bedrijf om software of hardware ter beschikking te stellen over het internet. De cloud provider zorgt voor het onderhoud en kosten van de <!-- TODO: fysieke apparatuur zoals de servers ? --> servers. Gebaseerd op de noden van je bedrijf kun je dan een aantal servers huren.
 
 ### Hybride Oplossing
 
-Met een hybride oplossing gaan we gedeeltelijk in de cloud werken en ook on premise. Het kan soms zijn dat er een applicatie draait in de cloud maar verbonden is met een server on premise.
+Met een hybride oplossing gaan we <!-- TODO: geen we, "wordt er " --> gedeeltelijk in de cloud werken en ook on premise. Het kan soms zijn dat er een applicatie draait in de cloud maar verbonden is met een server on premise.
 
 ![cloud vs on prem](./img/cloud_vs_on_prem.png)
 
@@ -47,11 +50,14 @@ Dataline is een bedrijf dat actief is in de print industrie en een ontwikkelaar 
 
 Dataline zelf heeft in hun hoofdkantoor in Loppem een hele IT infrastructuur. Daarbij horen een heleboel applicaties die gebruikt worden door de werknemers. Sommige applicaties die worden niet meer ondersteund en moeten naar de cloud. Daarom moet er onderzocht worden welke applicatie's best naar de cloud verplaatsen en welke best nog on premise blijven.
 
-Dit is zeer belangrijk voor Dataline voor de toekomst en de kostprijs van de IT infrastructuur. Hoe moet hun infrastructuur veranderen om up to date te blijven. Cloud computing kan ook de kostprijs verlagen en gebruikers gemak verhogen.
+Dit is zeer belangrijk voor Dataline voor de toekomst en de kostprijs van de IT infrastructuur. Hoe moet hun infrastructuur veranderen om up to date <!-- TODO: up-to-date
+ --> te blijven. Cloud computing kan ook de kostprijs verlagen en gebruikers gemak <!-- TODO: gebruiksgemak --> verhogen.
 
 ## Doelstelling
 
-Dit is een complex probleem waar een analyse gemaakt moet worden van de huidige IT omgeving, kijken hoe we die kunnen verbeteren en een plan opstellen voor de toekomst.
+ <!-- TODO: Algemeen voor deze paragraaf: geen we gebruiken - onpersoonlijk schrijven --> 
+
+Dit is een complex probleem waar een analyse gemaakt moet worden van de huidige IT omgeving, kijken hoe we <!-- TODO: geen we, "hoe die kan worden verbeterd ...." --> die kunnen verbeteren en een plan opstellen voor de toekomst.
 
 In de eerste fase bekijken we de verschillende applicaties die Dataline heeft. We maken een lijst op van alle servers die in de huidige omgeving gebruikt worden. We kijken naar de specificaties van de servers, dat is het aantal CPU's, de hoeveelheid RAM en de hoeveelheid storage. Van deze lijst kijken we welke applicaties naar de cloud moeten en welke die beter on premise zouden blijven.
 
@@ -62,7 +68,7 @@ In de derde fase wordt er gekeken naar de applicaties die lokaal moeten blijven.
 In de laatste fase word een test opstelling gemaakt op vlak van storage. Dit om te kijken of deze storage optie wel goed is voor de prijs.
 
 
-
+<!-- TODO: Dit mag je er terug uitdoen als je klaar bent -->
 <!--
 
 Ik denk dat je inleiding nog eens serieus onder handen moet worden genomen. Algemeen geldt dat je inleiding de lezer moet aanzetten om verder te lezen. Het is een van de belangrijkste hoofdstukken van je thesis. Het moet een goede context scheppen van het bedrijf, wat ze doen, wat hun probleem was, wat de mogelijkheden waren, wat de doelstellingen waren.
