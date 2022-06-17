@@ -4,6 +4,7 @@ Onderstaande tabel geeft een alfabetische lijst terug met alle afkortingen die i
 
 | Afkorting | Volledige vorm |
 | :---: | :--- |
-| API | Application Programmable Interface |
-| IoT | Internet of Things |
-| LAN | Local Area Network |
+| OU | Organizational Unit |
+| SAN | Storage Area Network |
+| DC | domeincontroller |
+

@@ -14,9 +14,9 @@ De versie die nu gebruikt wordt on premise is de Confluence server versie. Suppo
 
 ## Mail server
 
-Dataline heeft een eigen mail server en een mail filter server. De mail server is een GFI kerio connect mail server. Dit is een mail oplossing ge voor kleinere bedrijven die niet te veel geld willen invensteren voor een mail. GFI (het bedrijf die kerio connect aanbied) heeft opties om over te schakelen naar de cloud via een partner bedrijf. 
+Dataline heeft een eigen mail server en een mail filter server. De mail server is een GFI Kerio connect mail server. Dit is een mail oplossing ge voor kleinere bedrijven die niet te veel geld willen investeren voor een mail. GFI (het bedrijf die Kerio connect aanbied) heeft opties om over te schakelen naar de cloud via een partner bedrijf. 
 
-De mail filter server wordt gebruikt om inkommende emails te gaan filteren. Het doet dit op basis van een aantal regels en de geschiedenis van de emails die binnen zijn gekomen. Het heeft een black list en een white list van email adressen.
+De mail filter server wordt gebruikt om binnenkomende emails te gaan filteren. Het doet dit op basis van een aantal regels en de geschiedenis van de emails die binnen zijn gekomen. Het heeft een black list en een white list van email adressen.
 
 ## Telefonie servers
 
@@ -28,13 +28,13 @@ Dit gebeurt door te kijken naar de back ups van die servers en dan zo de server 
 
 De file server wordt voornamelijk gebruikt in Dataline door het marketing team. Daar wordt er vaak gebruikt gemaakt van zeer grote bestanden die moeten gedeeld worden via deze server. De grote van deze server is 6,5 TB.
 
-Er is een mogelijkheid om te server naar de cloud te doen. Dit zou de fileserver makkelijker toegangkelijk maken aangezien mensen dan ook thuis toegang zouden hebben. Ook zouden we de kosten uitsparen om de server up and running te houden. Er moet zeker naar de ze optie gekeken worden.
+Er is een mogelijkheid om te server naar de cloud te doen. Dit zou de fileserver makkelijker toegankelijk maken aangezien mensen dan ook thuis toegang zouden hebben. Ook zouden we de kosten uitsparen om de server up and running te houden. Er moet zeker naar de ze optie gekeken worden.
 
 De file server zelf is een SAMBA file share die gekoppeld wordt met LDAP. De koppeling met LDAP zorgt dat mensen zich eerst moeten inloggen met hun gebruikers account.
 
 ## Backup server
 
-Op de back up server worden incrementele back ups genomen van de virtuele machines, databases, mail server, etc. Dit zou ook eventueel gedeeltelijk naar de cloud kunnen gebracht worden. De brandbreedte van de verbinding kan wel een probleem zijn. 
+Op de back up server worden incrementele back ups genomen van de virtuele machines, databases, mail server, etc. Dit zou ook eventueel gedeeltelijk naar de cloud kunnen gebracht worden. De bandbreedte van de verbinding kan wel een probleem zijn. 
 
 ## Development Servers
 
