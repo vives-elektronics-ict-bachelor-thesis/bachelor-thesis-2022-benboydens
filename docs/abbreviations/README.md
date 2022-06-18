@@ -7,5 +7,10 @@ Onderstaande tabel geeft een alfabetische lijst terug met alle afkortingen die i
 | OU | Organizational Unit |
 | SAN | Storage Area Network |
 | DC | domeincontroller |
+| RAID | Redundant Array of Inexpensive Disks |
+| OS | Operating System |
+| VM | virtuele machine |
+| CPU | Central Processing Unit |
+| FTT | Failures To Tolerate |
 | NIC | Network Interface Card |
 

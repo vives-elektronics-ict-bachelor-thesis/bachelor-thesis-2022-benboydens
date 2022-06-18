@@ -1,81 +1,108 @@
 # Data Storage
 
-Om de applicatie op te zetten gebruik Dataline Virtuele Machines. Die VM's draaien op fysieke server die elk hun eigen storage hebben. Hier worden de virtuele servers besproken en hoe de storage precies in elkaar zit.
+Het beheren van data is zeer belangrijk voor elk bedrijf, data verlies kan leiden tot serieuze gevolgen en hoge kosten. Daarom moet het absoluut vermeden worden. Een goed beheer van data is nodig om de IT-infrastructuur in goede banen te leiden.
+
+Methoden zoals RAID en backups worden gebruikt om data te gaan beveiligen, maar deze hebben ook hun nadelen. Zoals bijvoorbeeld de hersteltijd van RAID setups of het feit dat backups maken lastig kan zijn. Dit wordt later in dit hoofdstuk nog besproken.
+
+Wanneer er gesproken wordt over data storage dan mogen virtuele machines niet vergeten worden. Dataline maakt gebruik van virtuele machines om verschillende applicaties en services uit te voeren. De data van de virtuele machines moet beschermd worden zodat de applicaties altijd up and running zijn.
+
+<!-- In dit hoofdstuk worden enkele principes besproken op het vlak van storage en de opslag van virtuele servers. -->
 
 ## RAID
 
-RAID of redundant array of independant disks wordt gebruikt om harde schijven te gaan combineren in 1 enkel volume. Het doel ervan is om reads-/writes te versnellen of om data te beschermen. Er zijn verschillende soorten RAID. We hebben RAID-0, RAID-1, RAID-5, RAID-6 en RAID-10.
+RAID of redundant array of independent disks wordt gebruikt om harde schijven te gaan combineren in 1 enkel volume. Het doel ervan is om reads-/writes te versnellen of om data te beschermen. Dataline gebruikt RAID om data van hun servers te gaan beschermen en versnellen. 
+
+### RAID Types
 
 ![img](./img/RAID.png)
 
-<br />
+#### RAID 0
 
-| Type | Beschrijving |
-| :----- | :--- |
-| RAID_0 | Deze manier wordt ook striping genoemd en dient voornamelijk om storage te gaan versnellen. De data wordt verspreid over 2 harde schijven. Dit zorgt ervoor dat je data tegelijk van beide schijven kan ophalen. |
-| RAID_1 | Deze manier wordt ook mirroring genoemd. Er wordt een kopie opgeslagen van de data op 2 verschillende harde schijven. Dit zorgt wanneer er iets fout loopt je nog een kopie hebt. |
-| RAID_5 | Gelijkaardig met RAID-1 maar deze keer wordt er geen kopie opgeslagen maar een pariteits onderdeel. Deze pariteit zorgt dat wanneer er iets misloopt je de data kan herstellen. Dit neemt minder plek in dan RAID-1 maar geeft dezelfde bescherming. De data wordt ook verspreid over de verschillende schijven dus het is ook sneller dan RAID-1.
-| RAID_6 | Deze methode werkt op dezelfde manier als RAID-5 maar je zal 2 keer een pariteit opslaan. Dit zorgt dat RAID-6 2 fouten kan maken. |
-| RAID_10 | Combinatie van RAID-1 en RAID-0. Je zal zowel stripen als mirroren |
+Deze manier wordt ook **striping** genoemd en dient om storage te gaan versnellen. De data wordt verspreid over 2 harde schijven en dit zorgt ervoor dat je data tegelijk van beide schijven kan ophalen. Merk op dat deze aanpak de kans op data verlies juist zal vergroten, aangezien er slechts 1 schijf moet falen om de data te verliezen. Deze methode wordt daarom enkel gebruikt voor niet belangrijke data die versnelt moet worden.
 
+#### RAID 1
 
-### Failures To Tolerate
+Deze manier wordt ook **mirroring** genoemd. Er wordt een kopie opgeslagen van de data op 2 verschillende harde schijven. Dit zorgt ervoor als een enkel schijf faalt je nog steeds een kopie hebt van je data. Wanneer beide schijven falen zal je wel data verlies hebben.
 
-Een belangrijk aspect van elke raid configuratie is hoeveel plek ze nemen en hoeveel fouten ze kunnen tolereren (FTT). De verschillen hiervan kun je zien in de tabel hier onder.
+#### RAID 5
 
-| RAID configuratie | FTT | Data size | Capacity Required |
-| :--- | :---: | :---: | :---: |
-| RAID 0 (striping) | 0 | 100 GB | 100 GB |
-| RAID 1 (mirroring) | 1 | 100 GB | 200 GB |
-| RAID 1 (mirroring) | 2 | 100 GB | 300 GB |
-| RAID 5 or RAID 6 (erasure coding) with four fault domains | 1 | 100 GB | 133 GB |
-| RAID 5 or RAID 6 (erasure coding) with six fault domains | 2 | 100 GB | 150 GB |
-| RAID 10 (striping + mirroring) | 1 | 100 GB | 200 GB |
+Met RAID-5 zal de data verspreid worden over 3 of meer opslag apparaten. Naast de data worden ook pariteitsblokken opgeslagen. Deze pariteitsblokken zorgen dat wanneer er iets misloopt je de data kan herstellen. Deze aanpak neemt minder plek in dan RAID-1 maar geeft dezelfde bescherming. Aangezien de data zal verspreid worden over meerdere harde schijven zal data inlezen sneller gebeuren. 
+
+Een nadeel van RAID-5 is dat data schrijven traag zal zijn, omdat ook telkens de pariteit moet berekend worden.
+
+#### RAID 6
+
+Met RAID-6 wordt de data verspreid over 4 of meer opslag apparaten. Deze methode werkt op dezelfde manier als RAID-5 maar je zal 2 pariteitsblokken opslaan. Dit zorgt dat RAID-6 twee schijven kan verliezen. Aan de andere kant maakt dit het schrijven van data nog trager dan RAID-5 omdat nu 2 pariteitsblokken moeten berekent worden.
+
+#### RAID 10
+
+Deze methode combineert de voordelen van RAID-1 en RAID-0. Striping en mirroring wordt toegepast op de data. Hiervoor zijn er minstens 4 opslag apparaten nodig.
+
 
 ### Software- vs Hardware RAID
 
-Er zijn 2 manieren om RAID te gaan implementeren in Software of met hardware. Zoals de naam het zelf als zegt zal bij Hardware RAID een extra fysieke component nodig zijn in de computer. Deze component wordt ook een **RAID controller** genoemd. Hier worden de voor- en nadelen van beide methoden bekeken.
+Er zijn 2 manieren om RAID te gaan implementeren in Software of met hardware. Bij Hardware RAID zal er een extra fysieke component nodig zijn in de computer. Deze component wordt ook de **RAID controller** genoemd. Bij software is er geen controller nodig en zal het operating system (OS) RAID implementeren. 
+
+Hier worden de voor- en nadelen van beide methoden eens bekeken.
 
 | Software RAID | Hardware RAID |
 | :---: | :---: |
 | Komt samen met OS (goedkoper) | Heeft een RAID controller nodig (duurder) |
 | Zet een last op CPU (trager) | Werkt onafhankelijk van de CPU (sneller) |
-| Disk zijn niet hot swappable<sup>1</sup> | Disk zijn wel hot swappable<sup>1</sup> |
+| Schijven zijn niet hot swappable | Schijven zijn wel hot swappable |
 
-*<sup>1</sup> Hot swappable wil zeggen dat we Disks kunnen verwisselen zonder het systeem af te sluiten.*
+Hot swappable wil zeggen dat schijven kunnen verwisselt worden zonder het systeem af te sluiten.
+
+
+### Failures To Tolerate
+
+Een belangrijk aspect van elke RAID configuratie is hoeveel opslagplek ze innemen en hoeveel fouten ze kunnen tolereren. Het aantal schijven dat een RAID configuratie kan verliezen noemt men in het Engels ook **failures to tolerate** (FTT).
+
+Hieronder worden de FTT, de gegevensgrootte en de benodigde capaciteit vergeleken van de verschillende RAID configuraties.
+
+| RAID configuratie | FTT | Gegevensgrootte | Benodigde capaciteit  |
+| :--- | :---: | :---: | :---: |
+| RAID 0 | 0 | 100 GB | 100 GB |
+| RAID 1 | 1 | 100 GB | 200 GB |
+| RAID 1 | 2 | 100 GB | 300 GB |
+| RAID 5 | 1 | 100 GB | 133 GB |
+| RAID 6 | 2 | 100 GB | 150 GB |
+| RAID 10 | 1 (soms 2)<sup>*</sup> | 100 GB | 200 GB |
+
+*<sup>\*</sup> Wanneer er 2 fouten gebeuren in hetzelfde RAID 1 paar heb je wel data verlies.*
 
 ## Virtuele Machines
 
-Bij het gebruikt van virtuele machines komt er ook storage kijken. Het beheren van je de data van virtuele machines kan een moeilijk process zijn en is enorm belangrijk om ervoor te zorgen dat je VM's altijd up and running zijn. Voor we inspringen op storage en virtuele machine moeten we eerst nog een altijd begrippen duidelijk maken. Zoals een **Hypervisor** wat neerkomt op het programma die vituele machines beheert op een server.
+Bij het gebruikt van virtuele machines komt er ook storage kijken. Het beheren van je de data van virtuele machines kan een moeilijk process zijn en is enorm belangrijk om ervoor te zorgen dat je VM's altijd up and running zijn. Het programma die virtuele machines beheert op een server is gekend als een **Hypervisor**.
 
-### Hypervisor
+Een **Hypervisor** dient om meerdere besturingssystemen tegelijk op een computer te laten draaien. Hyper visors zijn opgedeeld in 2 types. Type 1 (Native) en Type 2 (Hosted).
 
-Een **Hypervisor** of een VMM (Virtual Machine Monitor) dient om meerdere besturingssystemen tegelijk op een computer te laten draaien. Hyper visors zijn opgedeeld in 2 types. Type 1 (Native) en Type 2 (Hosted).
-
-#### Type 1
+### Type 1
 
 Een type 1 hypervisor draait rechtstreeks op de computer hardware en daarom word deze ook **Bare Metal** genoemd. Er is geen tussenkomst van het Besturingssysteem van de host. Dit wil zeggen dat Type 1 hypervisors efficiënt zijn om resources te gaan uitdelen aan de virtuele machines.
 
 Enkele voorbeelden van type 1 hypervisors zijn: **VMware ESXi, Citrix Xen, KMV en Microsoft Hyper-V**.
 
-#### Type 2
+![type1](./img/type.png)
+
+### Type 2
 
 Een type 2 hypervisor zal niet rechtstreeks werken op de computer hardware. Er zit nog een Besturingssysteem tussen. Een voordeel van een type 2 hypervisor is dat het gemakkelijk te gebruiken is omdat het kan geïnstalleerd worden als een programma. Het nadeel hiervan is dat het minder efficiënt is aangezien er nog een besturingssysteem tussen zit. 
 
 Voorbeelden van type 2 hypervisors zijn: **Oracle VirtualBox, VMware Workstation, Parallels Desktop**.
 
+![type1](./img/type2.png)
 
-### Huidige Omgeving
 
-Dataline maakt gebruikt van 2 verschillende hypervisors om hun virtuele machines te laten draaien. Ze maken gebruik van KVM en VMWare ESXi. Bijna alle virtuele machines maken gebruik van KVM. De reden hiervoor is omdat KVM open source is en gratis te gebruiken. Het is een betrouwbare hypervisor die door vele bedrijven gebruikt wordt.
+Dataline maakt gebruikt van 2 verschillende hypervisors om hun virtuele machines te laten draaien. Ze maken gebruik van KVM en ESXi beide type 1 hypervisors. KVM is een linux gebaseerde hypervisor die open source is en gratis te gebruiken. ESXi daarin tegen heeft een licentie nodig om de volledige functionaliteit te hebben. 
 
-Er is eigenlijk maar 1 applicatie die VMWare ESXi gebruikt en dat zijn de telefonie servers. De reden hiervoor is omdat het bedrijf die de telefonie servers aanbied enkel werkt met VMWare. De telefonie servers moeten daarom dus met ESXi werken.
+ESXi wordt enkel gebruikt voor de telefonie servers. De reden hiervoor is omdat het bedrijf die de telefonie servers aanbied enkel werkt met ESXi. Dataline gebruikt een gratis licentie die beperkte functionaliteit heeft. Aangezien enkel de telefonie servers moeten werken met ESXi is een gratis licentie voldoende.
 
-Hoe worden backups genomen van virtuele machines? Virtuele machines worden onderverdeeld in een aantal bestanden. Elk bestand heeft een specifieke functie en wordt gebruikt om alles te virtualiseren. Deze verdeling hangt af van welke hypervisor gebruikt wordt.
+### Backups
 
-### KVM
+De telefonie servers 
 
-KVM...
+Virtuele machines worden onderverdeeld in een aantal bestanden. Elk bestand heeft een specifieke functie en wordt gebruikt om alles te virtualiseren. Er wordt eens gekeken naar ESXi aangezien we 
 
 ### ESXi
 

@@ -20,13 +20,9 @@ Deze eindverhandeling werd geschreven onder begeleiding van volgende mentoren:
 
 * **Philip Van Isacker**
   * ICT & Senior Developer
-  * email indien toegestaan <!-- TODO: Als email niet mag worden getoond best dit weg doen -->
 
 * **Nick Legroe**
   * ICT & Senior Developer
-  * email indien toegestaan <!-- TODO: Als email niet mag worden getoond best dit weg doen -->
-
-<!-- Plaats enkel het mail-adres van jouw promotor(en) indien je hier uitdrukkelijk toestemming voor gekregen hebt. -->
 
 * **Nico De Witte**
   * Projectmedewerker/Lector - VIVES Hogeschool
