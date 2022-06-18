@@ -94,19 +94,18 @@ Voorbeelden van type 2 hypervisors zijn: **Oracle VirtualBox, VMware Workstation
 ![type1](./img/type2.png)
 
 
-Dataline maakt gebruikt van 2 verschillende hypervisors om hun virtuele machines te laten draaien. Ze maken gebruik van KVM en ESXi beide type 1 hypervisors. KVM is een linux gebaseerde hypervisor die open source is en gratis te gebruiken. ESXi daarin tegen heeft een licentie nodig om de volledige functionaliteit te hebben. 
+Dataline maakt gebruikt van 2 verschillende hypervisors om hun virtuele machines te laten draaien. Ze maken gebruik van KVM en ESXi, beide type 1 hypervisors. KVM is een gratis open source linux gebaseerde hypervisor terwijl ESXi een licentie nodig heeft om beschikking te hebben over de volledige functionaliteit. 
 
-ESXi wordt enkel gebruikt voor de telefonie servers. De reden hiervoor is omdat het bedrijf die de telefonie servers aanbied enkel werkt met ESXi. Dataline gebruikt een gratis licentie die beperkte functionaliteit heeft. Aangezien enkel de telefonie servers moeten werken met ESXi is een gratis licentie voldoende.
+ESXi wordt enkel gebruikt voor de telefonie servers. De reden hiervoor is omdat het bedrijf die de telefonie servers aanbied enkel werkt met VMWare ESXi. Dataline gebruikt een gratis licentie die beperkte functionaliteit heeft. Aangezien enkel de telefonie servers moeten werken met ESXi is een gratis licentie voldoende.
 
-### Backups
 
-De telefonie servers 
+### Storage van Virtuele Machines
 
-Virtuele machines worden onderverdeeld in een aantal bestanden. Elk bestand heeft een specifieke functie en wordt gebruikt om alles te virtualiseren. Er wordt eens gekeken naar ESXi aangezien we 
+<!-- Om beter te begrijpen hoe virtuele machines gebruik maken van storage moet er eerst gekeken worden naar de bestanden die worden aangemaakt om een virtuele machine voor te stellen. Elk bestand heeft een specifieke functie en wordt gebruikt om alles te gaan virtualiseren. Elke hypervisor heeft zijn eigen indeling voor deze bestanden.
 
-### ESXi
+De focus wordt hier gelegd op de indeling van ESXi aangezien de telefonie servers zeer belangrijk zijn. Werknemers maken gebruik van de telefonie servers om contact op te leggen met de klanten. Als deze servers niet beschikbaar zijn dan kunnen de werknemers hun job niet doen. Andere services zoals de backup server of de file server worden minder frequent gebruikt. 
 
-VMWare gebruikt een heleboel bestanden om Virtuele machine te gaan voorstellen. Hieronder kun je die zien.
+ESXi gebruikt een heleboel bestanden om Virtuele machine te gaan voorstellen. In onderstaande tabel worden de verschillende bestanden opgelijst.
 
 | Bestand | Beschrijving |
 | :---: | :--- |
@@ -116,5 +115,40 @@ VMWare gebruikt een heleboel bestanden om Virtuele machine te gaan voorstellen. 
 | Logs | alle logs worden hier in opgeslagen |
 | Swap | File gebruikt om swap geheugen te implementeren |
 | Delta | bevat de verschillen van de huidige status van de VM t.o.v. een snapshot |
-| Mem | Een snapshot van de memory van de computer |
+| Mem | Een snapshot van de memory van de computer | -->
+<!-- 
+Om een backup te maken van een virtuele machine worden deze bestanden gekopieerd naar de backup server. -->
 
+Een probleem dat Dataline nu nog heeft is op het vlak van storage. De telefonie servers draaien allemaal op virtuele machines. Elke virtuele machine bestaat uit een aantal bestanden die de status van de machine voorstelt. Als beveiliging worden er back ups genomen van die bestanden. Deze aanpak heeft echter enkele nadelen:
+
+- Er is een single point of failure in de telefonie servers. Als 1 iets kapot gaat kunnen mensen niet meer telefoneren.
+- Back ups nemen is lastig
+- Er zijn maar een paar mensen die weten hoe je een virtuele machine moet herstellen van een back up.
+
+We moeten dus een manier vinden om de bestanden van de VM te beveiligen tegen wanneer er iets misloopt. Dit moet een process zijn dat automatisch gebeurt.
+
+
+<!-- ## Probleem met backups
+
+Er zijn enkele problemen met de huidige manier van werken op vlak van backups. Het probleem ligt bij de telefonie servers, de huidige manier van werken is lastig en niet efficient.
+
+
+### Probleem 1
+
+Om een virtuele machine te gaan herstellen van een backup is er heel wat kennis nodig en er zijn niet veel mensen die weten hoe dit moet. Wanneer er niemand op de werkvloer is met genoeg kennis dan zal de service of applicatie down blijven. Er moet een manier zijn om automatisch of gemakkelijk de virtuele machine terug draaiende te krijgen.
+
+### Probleem 2
+
+Het nemen van backups van de telefonie servers is zeer lastig omdat er telkens een backup genomen moet worden van de volledige harde schijf. Dit zorgt dat incrementele backups enorm veel plaats innemen waardoor dit niet echt een optie is. De reden dat telkens de volledige schijf moet gekopieerd worden is omdat de gratis versie van ESXi niet alle functionaliteit bevat. Dit zou wel mogelijk zijn met een betalende versie. -->
+
+### SAN
+
+Een SAN is een storage area network. Je kan het zien als een apart netwerk speciaal gemaakt om de storage op een centrale plek op te kunnen slaan. Servers communiceren dan via dit netwerk om gebruik te maken van storage.
+
+Dit is de ideale oplossing om de virtuele machines bestendig te maken tegen fouten. De reden hiervoor is omdat we in een SAN data 2 maal kunnen opslaan. Wanneer er een fout gebeurt met de storage hebben we nog een kopie die wel werkt. Dit process kan automatisch gebeuren en er hoeft niet iemand manueel tussen te komen.
+
+### vSAN
+
+Een gekend alternatief voor SAN is een vSAN dit is een virtuele SAN die de storage van verschillende servers zal vitualiseren tot een enkele SAN datastore. Het werkt gelijkaardig als een SAN alleen is er geen nood om speciale apparatuur hiervoor te kopen. Er zijn verschillende opties om een vSAN te implementeren zoals VMWare vSAN en Starwind vSAN.
+
+VMWare vSAN kan nogal duur zijn daarom dat starwind misshien beter zou zijn. Dit wordt het best eens uitgetest.
