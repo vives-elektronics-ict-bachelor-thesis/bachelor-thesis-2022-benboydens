@@ -7,21 +7,21 @@ Hoe beginnen we hier nu precies aan? Dit is een complexe opdracht omdat er een h
 
 ## Begin
 
-Het verhaal begint bij de opstelling van Dataline voor ik daar in stage ging. Dingen zoals Conluence, email, telefonie, backups draaien allemaal op lokale on premise servers. 
+Het verhaal begint bij de opstelling van Dataline voor ik daar in stage ging. Dingen zoals Confluence, email, telefonie, backups draaien allemaal op lokale on premise servers. 
 
-De manier dat ze te werk gingen is dat voor elke applicatie een virtuele machine wordt aangemaakt op een server. Zo is het gemakklijk om de resources van die applicatie te gaan beheren. Je kan makkelijk CPU cores, RAM geheugen en schijf geheugen toekennen per VM.
+De manier dat ze te werk gingen is dat voor elke applicatie een virtuele machine wordt aangemaakt op een server. Zo is het gemakkelijk om de resources van die applicatie te gaan beheren. Je kan makkelijk CPU cores, RAM geheugen en schijf geheugen toekennen per VM.
 
 ### Confluence
 
-Maar er was een probleem met een bepaalde applicatie. Die applicatie was Confluence. Wat doet Confluence? Het is simpel gezegd een plek waar mensen documenten kunnen aanmaken en delen met elkaar. Het wordt door iedere werknemer gebruikt en bevat een heleboel belangrijke documenten. 
-
-Confluence zelf wil afstappen van de lokale on premise omgevingen en daarom verplichten ze de gebruikers om naar de cloud over te stappen. Om dit aan te pakken moeten we eerst eens kijken hoe niewue gebruikers worden aangemaakt in Confluence.
+Maar er was een probleem met een bepaalde applicatie. Die applicatie was Confluence. 
+ Om dit aan te pakken moeten we eerst eens kijken hoe niewue gebruikers worden aangemaakt in Confluence.
 
 ## Gebruikers accounts
 
 Wanneer een nieuwe werknemer toekomt in Dataline wordt er voor hem of haar een nieuw account aangemaakt. Dit gebeurt in de **Domain controller** van Dataline. Een domain controller kan je zien als een database van alle gebruikers.  
 
-Confluence heeft een LDAP interface die kan praten met de domain controller. Wanneer je probeert in te loggen in Confluence dan zal er een verbinding gemaakt worden met de domain controller. Confluence zal je dan proberen in te loggen met de credentials die je hebt ingegeven. Indien de credentials overeen komen met de domain controller krijg je toegang en wordt je ingelogt.
+<!-- TODO: verplaatsen naar Confluence hoofdstuk -->
+Confluence heeft een LDAP interface die kan praten met de domain controller. Wanneer je probeert in te loggen in Confluence dan zal er een verbinding gemaakt worden met de domain controller. Confluence zal je dan proberen in te loggen met de credentials die je hebt ingegeven. Indien de credentials overeen komen met de domain controller krijg je toegang en wordt je ingelogd.
 
 
 ### Permissies
@@ -47,6 +47,8 @@ Om een goede overgang van Confluence naar de Cloud te garanderen zijn er een aan
 
 De huidige manier van werken is gemakelijk omdat alles kan gebeuren op de domain controller. Als we Confluence naar de cloud zullen brengen dan zou er een manier moeten zijn om de gebruiker accounts van de domain controller te synchroniseren met die in de cloud. Gelukkige bestaat er hier al een gekende oplossing voor en dat is Microsoft Azure AD.
 
+<!-- TODO: verwerken in Azure AD hoofdstuk -->
+
 ### Microsoft Azure AD
 
 Microsoft Azure AD wordt gezien als de cloud versie van een domain controller. Het is mogelijk om een verbinding op te zetten van de Domain Controller naar de Cloud via Azure AD. Dit kan gratis gebeuren omdat dit inbegrepen is bij Office 365. Office 365 is een packet van Microsoft die je toegang geeft tot cloud services zoals OneDrive maar ook tot Word, PowerPoint, teams, etc.
@@ -56,6 +58,8 @@ Met Azure AD worden gebruikers en groepen automatisch gesynchroniseerd naar de c
 Er zijn hier nog een paar problemen mee. Om dit te doen hebben we domain controller nodig die minstens Windows Server 2016 is. Dit is nu nog niet het geval dus we zullen een nieuwe domain controller moeten aanmaken met een nieuwere versie.
 
 Ook moeten we de groepen van Confluence eens herschikken en kijken om de huidige permissies op te kuisen. Dit is belangrijk omdat de huidige permissies complex te beheren zijn.
+
+<!-- TODO: verwerken in Datastorage hoofdstuk -->
 
 ## Storage
 

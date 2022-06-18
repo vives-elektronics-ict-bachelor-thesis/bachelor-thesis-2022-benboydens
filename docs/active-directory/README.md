@@ -1,6 +1,6 @@
 # Active Directory
 
-Active Directory is de naam die word gegeven aan de directory service van Microsoft voor een Windows domein. Het komt inbegrepen bij meeste Windows Servers als een verzameling van services. Een Windows server die Active Directory draait is gekend als een **domeincontroller**.
+Active Directory is de naam die word gegeven aan de directory service van Microsoft voor een Windows domein. Het komt inbegrepen bij meeste Windows Servers als een verzameling van services. Een Windows server die Active Directory draait staat ook gekend als een **domeincontroller**.
 
 <!-- TODO verhaal van wat active directory betekent voor Dataline, hoe wordt het nu gebruikt enzo aanvullen -->
 ## Domeincontroller
