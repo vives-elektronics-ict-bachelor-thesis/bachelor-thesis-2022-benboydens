@@ -85,16 +85,7 @@ Dit lukt zonder problemen en alles werkt zoals verwacht.
 
 Storage is de traagste factor van elke computer, daarom is de performance van storage zeer belangrijk voor virtuele machines. Om te kijken of Starwind vSAN een goede optie zou zijn, moeten we weten hoe efficient Starwind omgaat met storage. Een heleboel factoren hebben invloed hebben op de performance van vSAN, dus het is belangrijk om verschillende opstellingen te testen en te kijken wat het beste optie is. 
 
-Hoe kan de performantie getest worden van een vSAN? Een manier om dit te doen is om een werklast te gaan genereren op de storage van een virtuele machine.
-
-Er zijn 3 scenario's die interessant zijn om te testen voor performance:
-- VM op lokale datastore
-- VM op vSAN datastore
-- VM moet werken via iSCSI omdat lokale host niet gesynchroniseerd is.
-
-
-
-### Workload
+### Fio
 
 De manier waarop we een workload zullen simuleren is door gebruik te maken van een Disk IO test tool genaamd **fio**. Het is een command line tool die zeer veel parameters heeft om te gaan testen. De gebruikte parameters zijn gebaseerd op een artikel van Oracle over het testen van Block storage [Oracle](https://docs.oracle.com/en-us/iaas/Content/Block/References/samplefiocommandslinux.htm).
 
@@ -103,14 +94,128 @@ Met fio zullen we IO operaties gaan uitvoeren om statistieken te verzamelen zoal
 - De bandbreedte van de data stroom (in MB/s of GB/s)
 - Hoe snel de storage antwoord op IO requests (latency)
 
-Om de verschillende aspecten van de storage te controleren gaan er 4 soorten testen uitgevoerd worden:
+Het aantal IOPS is een zeer belangrijke statistiek. Databases zullen zeer veel kleine reads en writes gaan uitvoeren op een storage device. Daarom moet een database server best zo hoog mogelijk aantal IO operaties kunnen uitvoeren om efficient vele requests te kunnen vervolledigen.
+
+Om de verschillende scenario's van de storage te controleren gaan er 4 soorten testen uitgevoerd worden:
 - Random reads
 - File random reads/writes
 - Random read/writes
 - Sequentiële reads
 
-### Baseline
+Alle testen worden rechtstreeks op de storage uitgevoerd behalve de file random reads/writes. Deze test zal IO operaties doen op een file. Het verschil met rechtstreeks werken is dat hier het besturingssysteem nog tussen komt. Er wordt dus verwacht dat deze test iets trager zullen zijn.
 
-Eerst stellen we een baseline op waarmee we volgende testen mee zullen vergelijken. Als baseline werken we met de lokale datastore en laten we alles op default instellingen van Starwind vSAN. Eens we alle statistieken hebben verzameld en een overzicht hebben over hoe goed de performance is dan schakelen we over naar de vSAN datastore en kijken we wat de verschillen zijn.
+## Testen
 
-## Resultaten
+Er zijn 3 scenario's die interessant zijn om te testen voor performance:
+- VM op lokale datastore
+- VM op vSAN datastore
+- VM moet werken via iSCSI omdat lokale host niet gesynchroniseerd is.
+
+De laatste test is belangrijk want dit stelt het scenario voor dat een storage device lokaal niet meer beschikbaar zou zijn. De virtuele machine zal dan over het netwerk IO operaties doen met behulp van iSCSI. Op deze manier zal de virtuele machine nooit down komen te staan.
+
+
+### Lokale Datastore
+
+We draaien een vm op de lokale datastore. Hier zal de snelheid gelijk moeten zijn aan de snelheid van een SATA SSD wat ongeveer 300MB/s zou moeten zijn.
+
+![local](./img/performance_test_local.png)
+
+#### Resultaten
+
+| IOPS performance test | IOPS (reads) | IOPS (writes) |
+| :--- | :---: | :---: | 
+| Random Reads | 285k | / |
+| Random reads/writes | 70,9k | 70,9k |
+| File random reads/writes | 69,4k | 69,3k |
+| Sequential reads | 292k | / |
+
+| Throughput Performance Tests | BW (Read) | BW (Write) |
+| :--- | :---: | :---: | 
+| Random Reads | 2468 MB/s | / |
+| Random reads/writes | 347 MB/s | 348 MB/s |
+| File random reads/writes | 319 MB/s | 319 MB/s |
+| Sequential reads | 2698 MB/s | / |
+
+| Latency Performance Tests | Tijd (µs)	| |
+| :--- | :---: | :---: | 
+| Random Reads | 45,6 µs | / |
+| Random reads/writes | 109,69 µs | 51,20 µs |
+
+### vSAN Datastore
+
+We draaien een vm op de vSAN datastore. Hier zal nog steeds gebruikt gemaakt worden van de lokale SSD maar dan via de vSAN datastore.
+
+![datastore](./img/performance_test_vsan_datastore.png)
+
+#### Resultaten
+
+| IOPS performance test | IOPS (reads) | IOPS (writes) |
+| :--- | :---: | :---: |
+| Random Reads | 202k | / |
+| Random reads/writes | 26,3k | 26,3k |
+| File random reads/writes | 25,7k | 25,7k |
+| Sequential reads | 251k | / |
+
+| Throughput Performance Tests | BW (Read) | BW (Write) |
+| :--- | :---: | :---: |
+| Random Reads | 2622 MB/s | / |
+| Random reads/writes | 289 MB/s | 290 MB/s |
+| File random reads/writes | 271 MB/s | 300 MB/s |
+| Sequential reads | 2210 MB/s | / |
+
+| Latency Performance Tests | Tijd (Read) | Tijd (Write) |
+| :--- | :---: | :---: |
+| Random Reads | 109,12 µs | / |
+| Random reads/writes | 266,03 µs | 406,39 µs |
+
+### Via iSCSI verbinding
+
+Deze keer sluiten we de Starwind vSAN node af op de host. Dit zorgt dat de vm geen toegang meer zal hebben tot de lokale SSD. De vm moet nu via de vSAN datastore IO operaties gaan uitvoeren op de andere Starwind node. Het zal doet doen aan de hand van iSCSI commando's. De iSCSI verbinding gaat over de nieuwe snelle netwerk kaart, hierdoor zouden we niet zo'n groot verschil mogen zien ten opzichte van de lokale datastore.
+
+![iscsi](./img/performance_test_vsan-iscsi.png)
+
+#### Resultaten
+
+| IOPS performance test | IOPS (reads) | IOPS (writes) |
+| :--- | :---: | :---: |
+| Random Reads | 222k | / |
+| Random reads/writes | 38,8k | 38,8k |
+| File random reads/writes | 35,2k | 35,2k |
+| Sequential reads | 265k | / |
+
+| Throughput Performance Tests | BW (Read) | BW (Write) |
+| :--- | :---: | :---: |
+| Random Reads | 3226 MB/s | / |
+| Random reads/writes | 276 MB/s | 277 MB/s |
+| File random reads/writes | 329 MB/s | 330 MB/s |
+| Sequential reads | 2662 MB/s | / |
+
+| Latency Performance Tests | Tijd (µs)	| |
+| :--- | :---: | :---: |
+| Random Reads | 110,83 µs | / |
+| Random reads/writes | 267,58 µs | 212,2 µs |
+
+## Conclusie
+
+::: danger Opmerking
+Zoals hierboven kan gezien worden zijn in de testen de resultaten van de **random reads** en **sequential reads** enorm groot. Zo groot zelf dat ze sneller zijn dan de SSD. Dit is mogelijks te wijten aan caching van storage. Deze resultaten zullen we om die reden niet meenemen in de conclusie.
+:::
+
+### IOPS
+
+In de onderstaande grafiek wordt gekeken naar het gemiddelde aantal IOPS voor elk scenario. Hier kan er gezien worden dat het aantal IOPS duidelijk hoger zal zijn wanneer een lokale datastore wordt gebruikt. Dit is logisch aangezien dat met een lokale datastore de IO requests sneller de SSD zullen bereiken.
+
+![iops compared](./img/average_iops_compared.png)
+
+### Bandbreedte
+
+Hier wordt gekeken naar de gemiddelde bandbreedte voor elk scenario. Het valt op dat er weinig verschil is tussen de verschillende methoden. Dit is te wijten aan het feit dat voor de bandbreedte test grotere blokken data worden opgevraagd. Dit zorgt dat er minder IO operaties moeten gebeuren waardoor het verschil tussen de 3 minder merkbaar is.
+
+![iops compared](./img/average_bw_compared.png)
+
+### Latency
+
+In de onderstaande grafiek wordt gekeken naar de tijd dat de SSD erover doet om een IO request te voldoen. Er is een duidelijk verschil namelijk dat requests op de lokale datastore sneller worden beantwoord. Net zoals bij de IOPS zullen requests sneller de SSD bereiken met een lokale datastore.
+
+![iops compared](./img/average_lat_compared.png)
+
