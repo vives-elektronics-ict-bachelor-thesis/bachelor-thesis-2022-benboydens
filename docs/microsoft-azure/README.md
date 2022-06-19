@@ -85,7 +85,7 @@ Pass-through Auth + Password Hash Sync zo ideaal zijn maar het laat ons niet toe
 
 Dataline wil de Active Directory synchroniseren met Azure AD. Dit noemt provisioning en het is een process die automatisch gebruikers gaat aanmaken, verwijderen en up to date houden.
 
-![user prov](./img/user%20provisioning.png)
+![user prov](./img/user-provisioning.png)
 
 Er zijn 2 opties om automatic user en groep provisioning te gaan doen.
 
