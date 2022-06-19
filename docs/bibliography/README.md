@@ -10,6 +10,8 @@ B. (2022, 22 januari). Azure AD Connect: When you already have Azure AD - Micros
 
 B. (2022b, mei 5). What is Azure AD Connect cloud sync? - Microsoft Entra. Microsoft Docs. Geraadpleegd op 30 april 2022, van [https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/what-is-cloud-sync#comparison-between-azure-ad-connect-and-cloud-sync](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/what-is-cloud-sync#comparison-between-azure-ad-connect-and-cloud-sync)
 
+B. (2022c, juni 2). Authentication for Azure AD hybrid identity solutions - Microsoft Entra. Microsoft Docs. Geraadpleegd op 28 april 2022, van [https://docs.microsoft.com/en-us/azure/active-directory/hybrid/choose-ad-authn](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/choose-ad-authn)
+
 Bigelow, S. J. (2020, 30 september). What is a SAN? Ultimate storage area network guide. SearchStorage. Geraadpleegd op 5 juni 2022, van [https://www.techtarget.com/searchstorage/definition/storage-area-network-SAN](https://www.techtarget.com/searchstorage/definition/storage-area-network-SAN)
 
 Fisher, C. (2018). Cloud versus On-Premise Computing. American Journal of Industrial and Business Management, 08(09), 1991–2006. [https://doi.org/10.4236/ajibm.2018.89133](https://doi.org/10.4236/ajibm.2018.89133)

@@ -4,13 +4,17 @@ Onderstaande tabel geeft een alfabetische lijst terug met alle afkortingen die i
 
 | Afkorting | Volledige vorm |
 | :---: | :--- |
-| OU | Organizational Unit |
-| SAN | Storage Area Network |
-| DC | domeincontroller |
-| RAID | Redundant Array of Inexpensive Disks |
-| OS | Operating System |
-| VM | virtuele machine |
+| AD | Active Directory |
 | CPU | Central Processing Unit |
-| FTT | Failures To Tolerate |
-| NIC | Network Interface Card |
+| DC | domeincontroller |
 | DG | Disk Group |
+| FCP | Fiber Channel Protocol |
+| FTT | Failures To Tolerate |
+| iSCSI | Internet Small Computer System Interface |
+| NIC | Network Interface Card |
+| OS | Operating System |
+| OU | Organizational Unit |
+| RAID | Redundant Array of Inexpensive Disks |
+| RAM | Random Access Memory |
+| SAN | Storage Area Network |
+| VM | virtuele machine |
