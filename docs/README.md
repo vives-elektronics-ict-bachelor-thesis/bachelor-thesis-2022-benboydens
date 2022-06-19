@@ -18,21 +18,25 @@ Een stap naar de toekomst kan zijn om gebruik te maken van Cloud computing. Het 
 
 Een ander belangrijk concept is data storage van applicaties. Deze moeten een zo hoog mogelijke up-time hebben zodat deze altijd beschikbaar zijn. Maar als iets misloopt met de storage dan kan het zeer lang duren om de applicatie terug werkende te krijgen. Een gekende manier om fout tolerantie te gaan introduceren op het vlak van storage is met een vSAN. Dit is een virtueel netwerk van opslag en het zorgt dat je storage zo goed als altijd beschikbaar is.
 
-Om een plan op te stellen voor de IT-omgeving van een bedrijf moeten alle applicaties bekeken worden. Per applicatie moet er afgevraagd worden of deze naar de cloud moet of dat deze applicatie best lokaal moet blijven en beveiligt met een vSAN.
+Om een plan op te stellen voor de IT-omgeving van een bedrijf moeten alle applicaties bekeken worden. Per applicatie moet beslist worden of deze naar de cloud moet of best lokaal blijft op een vSAN.
 
 In deze thesis wordt synchronisatie van een lokale omgeving naar de cloud voorzien. Er wordt een prijsanalyse gedaan op applicaties zoals Confluence, Jira en email om te migreren naar de cloud.
 
-Verschillende types vSAN worden besproken en er wordt een specifiek type uitgetest. Uit de test resultaten halen we statistieken waarmee we andere implementatie kunnen vergelijken.
+Verschillende types vSAN worden besproken en Starwind vSAN wordt getest. Deze resultaten worden gebruikt om andere opstellingen te vergelijken.
 
-## Dankwoord
+## Abstract - English version
 
-Graag zou ik enkele mensen bedanken die me hebben geholpen tijden mijn stage en bachelorproef.
+Every company wants an IT environment that is secure and ready for the future. But there are heavy costs for realizing this. There is no single right way to do something, everything has its pros and cons when it comes to IT. That is why a good analysis is necessary to know what the next step is.
 
-Eerst zal ik Philip Van Isacker bedanken om mij tijdens de stage op te leiden en hulp te bieden tijdens de bachelorproef. Ook wil ik de mensen van Dataline bedanken om mij te verwelkomen in hun bedrijf en het mogelijk te maken om mijn stage daar te doen.
+A step towards the future could be to use Cloud computing. The concept has been around for a while, but now companies are really starting to commit to it. More and more small businesses are turning to the cloud to take advantage of its benefits such as scalability and accessibility.
 
-Dan wil ook nog een dank woordje geven aan mijn Vives-mentor Nico De Witte voor zijn feedback en snelle antwoorden.
+Another important concept is data storage of applications. Apps should always have the highest possible uptime so that they are constantly available. But if something goes wrong with the storage then it can take a long time to get the application back to work. A well-known way to implement fault tolerance of storage is with a vSAN. This is a virtual network of storage and it ensures that your storage is almost always available.
 
-Ten slotte wil ik nog eens dankjewel zeggen tegen
+To create a plan for a company's IT environment, all applications need to be looked at. A decision must be made for each application. Will this application move to the cloud or should it remain local on a vSAN.
+
+In this thesis, synchronization is provided from a local environment to the cloud. A price analysis is done on migrating apps such as Confluence, Jira and email to the cloud.
+
+Different types of vSAN are discussed and Starwind vSAN is tested. These test result serves as a baseline to compare other setups.
 
 ## Mentors
 
@@ -47,11 +51,19 @@ Deze eindverhandeling werd geschreven onder begeleiding van volgende mentoren:
 
 ## Over de auteur
 
-Hallo mijn naam is Ben Boydens en ik ben iemand die van jongs af aan al gefascineerd was door computers daarom dat ik een studie richting heb gekozen in de ICT.
+Ben Boydens is iemand die van jongs af aan al gefascineerd was door computers daarom dat hij een studie richting heeft gekozen in de ICT.
 
-Ik ben iemand die zeer praktisch is en graag dingen maakt. Ook ben ik geduldig en heb een goed gevoel voor teamgeest.
+Ben is iemand die zeer praktisch is en graag dingen maakt. Hij is ook geduldig en heeft een goed gevoel voor teamspirit. Tijdens het weekend is hij scouts leiding en gaat ik graag eens weg met zijn medeleiding.
 
-Tijdens het weekend ben ik scouts leiding en ga ik graag eens weg met vrienden.
+## Dankwoord
+
+Graag zou ik enkele mensen bedanken die me hebben geholpen tijden mijn stage en bachelorproef.
+
+Eerst zal ik Philip Van Isacker bedanken om mij tijdens de stage op te leiden en hulp te bieden tijdens de bachelorproef. Ook wil ik de mensen van Dataline bedanken om mij te verwelkomen in hun bedrijf en het mogelijk te maken om mijn bachelorproef daar te doen.
+
+Dan wil ook nog een dank woordje geven aan mijn Vives-mentor Nico De Witte voor zijn feedback en snelle antwoorden.
+
+Ten slotte wil ik nog eens dankjewel zeggen tegen de Vives leraren die me hebben geholpen om tot hier te geraken.
 
 ## Digitale versie
 
