@@ -1,24 +1,22 @@
 # SAN vs vSAN
 
-
+Om de telefonie servers van Dataline fout tolerant te maken moet er een oplossing zijn die automatisch of zeer makkelijk virtuele machines kan beveiligen. Een SAN of vSAN wordt door veel bedrijven gebruikt om hun storage fout tolerant te gaan maken. In dit hoofdstuk worden beide oplossingen vergeleken en wordt de werking ervan uitgelegd.
 
 ## SAN
 
-Een SAN of een Storage Area Network is een netwerk dat specifiek gebruikt wordt om grote hoeveelheden data te gaan opslaan. Een SAN bestaat uit 3 grote delen. De **servers**, het **netwerk** en de **storage**. De servers zijn allemaal verbonden via het netwerk. Het netwerk zelf bestaat uit een aantal switches die allemaal verbonden zijn met hoge snelheid verbindingen, dit zodat de data zo snel mogelijk kan doorgegeven worden naar de servers. De storage zal de data meerdere malen gaan opslaan voor redundancy.
+Een Storage Area Network (SAN) is een netwerk dat specifiek gebruikt wordt om grote hoeveelheden data te gaan opslaan. Een SAN bestaat uit 3 grote delen. De **servers**, het **netwerk** en de **storage**. De servers zijn allemaal verbonden via het netwerk. Het netwerk zelf bestaat uit een aantal switches die allemaal verbonden zijn met hoge snelheid verbindingen, dit zodat de data zo snel mogelijk kan doorgegeven worden naar de servers. De storage zal de data meerdere malen gaan opslaan voor redundancy.
 
-![img](./img/SAN-diagram.png)
+<img src="./img/SAN-diagram.png" width="550" style="display: block;margin: 0 auto;"/>
 
 ### SAN Netwerk
 
-Zoals al gezegd bestaat het SAN netwerk uit een aantal switches die verbonden worden met hoge snelheid verbindingen. Zoals je kan zien hieronder worden de switches verbonden met alles in het netwerk! Dit om te zorgen voor redundancy. Er kunnen zoveel servers en storage units gebruikt worden als je wilt.
+Het SAN netwerk uit hoge snelheid verbindingen en switches die worden verbonden met alles in het netwerk. Dit zorgt ervoor dat er voor elke verbinding een vervanging is, zo kan gelijk welke verbinding in de figuur verwijdert worden en alles zal nog bereikbaar zijn. SAN is enorm schaalbaar want er kan zoveel storage en servers gebruikt worden als nodig is. Deze kunnen makkelijk achteraf nog toegevoegd worden.
 
-![img2](./img/SAN-structuur.jpg)
+<img src="./img/SAN-structuur.jpg" width="450" style="display: block;margin: 0 auto;"/>
 
 ### SAN Fiber
 
-De verbindingen in een SAN ...
-
-In een SAN worden speciale protocollen gebruikt voor de verbindingen tussen de apparaten en de switches. Hier worden de 2 meest gebruikte uitgelegd.
+Een SAN maakt storage devices beschikbaar voor de servers over het netwerk. Er worden speciale protocollen gebruikt om IO operaties over een netwerk te sturen. Een SAN maakt altijd gebruik van Block storage, dit wil zeggen dat data geschreven en gelezen wordt in blokken. Er zijn 2 frequente protocollen die gebruikt worden voor een SAN.
 
 | Protocol | Beschrijving |
 | :---: | :--- |
@@ -27,24 +25,21 @@ In een SAN worden speciale protocollen gebruikt voor de verbindingen tussen de a
 
 ### SAN Use Cases
 
-Hier enkele voorbeelden van hoe een SAN wordt gebruikt in het echt:
+Om beter te begrijpen waarom een SAN nodig zou zijn, worden hier enkele use cases overlopen van een SAN.
 
 | Use Case | Uitleg |
 | :--- | :--- |
 | Oracle databases | Worden veel gebruikt en hebben hoge performance + availability nodig |
 | Microsoft SQL Server databases | Bevatten vaak kritische data dus hoge performance + availability nodig |
-| Large virtualization deployments using VMware, KVM, or Microsoft Hyper-V | Meestal bevatten deze omgevingen vele verschillende virtuele machines. Vele verschillende Operatiing systemen en applicaties draaien op deze virtuele servers. Daarom dat het belangrijk is dat de infrasturtuur betrouwbaar is en fout tolerant. Want een enkele failure kan meerdere applicaties beïnvloeden. |
-| Large virtual desktop infrastructures (VDIs) | Vele vrituele desktops kunnen lastig zijn om te beheren. Een SAN zorgt dat alle data gecentraliseerd is en makkelijker te beheren. |
-| SAP or other large ERP or CRM environments | SAN architectures are ideal for enterprise resource planning and customer resource management workloads |
+| Large virtualization deployments using VMware, KVM, or Microsoft Hyper-V | Meestal bevatten deze omgevingen vele verschillende virtuele machines. Vele verschillende besturingssystemen en applicaties draaien op deze virtuele servers. Daarom dat het belangrijk is dat de infrastructuur betrouwbaar is en fout tolerant. Want een enkele failure kan meerdere applicaties beïnvloeden. |
+| Large virtual desktop infrastructures (VDIs) | Vele virtuele desktops kunnen lastig zijn om te beheren. Een SAN zorgt dat alle data gecentraliseerd is en makkelijker te beheren. |
 
-### Voor en nadelen
-
-Deze manier van werken heeft een aantal voordelen.
+### Voordelen
 
 - SAN's zijn fout tolerant en verwijderen de single point of failure. Zelf als er een server, een switch of een storage unit zou weg vallen zijn er nog andere apparaten in het netwerk die de taak kunnen overnemen.
 - Deze manier is ook enorm schaalbaar omdat er gemakkelijk meer storage en servers kunnen toegevoegd worden.
 
-De nadelen van SAN zijn:
+### Nadelen
 
 - Een fysieke SAN aanmaken kan enorm duur zijn.
 - Het is complex om te realiseren
@@ -55,50 +50,46 @@ De nadelen van SAN zijn:
 
 Een vSAN is een alternatief voor een gewone SAN. Het is een virtuele versie van een SAN. Een vSAN abstraheert de opslag en zorgt dat applicaties en virtuele machines toegang hebben tot een virtuele datastore. Het combineert de storage van verschillende virtuele servers tot **1 algemene datastore**.
 
-Een vSAN is dus een soort **virtueel netwerk** die gebruikt wordt om de storage af te handelen. Het voordeel hiervan is dat de storage door software zal worden beheert en dat we meer vrijheid en opties hebben. We kunnen bijvoorbeeld data gaan abstraheren en verdelen over verschillende harde schijven. Zo kunnen we redundancy gaan introduceren met RAID 1, 5 of 6.
+Een vSAN is dus een soort **virtueel netwerk** die gebruikt wordt om de storage af te handelen. Het voordeel hiervan is dat de storage door software zal worden beheert en dat er meer vrijheid en opties zijn. Zo kan data bijvoorbeeld geabstraheerd  en verdeeld worden over verschillende harde schijven. Zo kan fout tolerantie gerealiseerd worden met RAID 1, 5 of 6.
 
-Soms wil je verschillende data anders behandelen. Bijvoorbeeld als je 2 virtuele machines hebt. Stel op VM1 wil simpele RAID 1 bescherming, terwijl de data op VM2 RAID 5 bescherming nodig heeft. Op de traditionele manier zou je niet met 1 datastore kunnen werken je zou er 2 nodig hebben aangezien ze verschillende RAID methoden gebruiken.
+Soms wil een bedrijf verschillende data anders gaan behandelen. Bijvoorbeeld als er 2 virtuele machines zijn. Stel op VM1 is er simpele RAID 1 bescherming, terwijl de data op VM2 RAID 5 bescherming nodig heeft. Op de traditionele manier kan niet met 1 datastore gewerkt worden en zouden er 2 nodig zijn aangezien ze verschillende RAID methoden gebruiken.
 
-![img3](./img/datastore-vSAN-1.png)
+<img src="./img/datastore-vSAN-1.png" width="450" style="display: block;margin: 0 auto;"/>
 
-Maar met vSAN kun je de storage gaan abstraheren zodat je een enkele centrale datastore hebt. In die datastore wordt er dan gezorgd dat de RAID 1 en 5 bescherming geïmplementeerd worden. Dit gebeurt allemaal automatisch en je moet dit gewoon instellen.
+Maar met vSAN kan de storage worden geabstraheerd zodat er een enkele centrale datastore is. In die datastore wordt er dan gezorgd dat de RAID 1 en 5 bescherming geïmplementeerd worden. Dit gebeurt automatisch en kan ingesteld worden naar de noden van de gebruiker.
 
-![img4](./img/datastore-vSAN-2.png)
+<img src="./img/datastore-vSAN-2.png" width="450" style="display: block;margin: 0 auto;"/>
 
-Er zijn een heleboel vSAN opties waaruit we kunnen kiezen. Veel gebruikte opties zijn bijvoorbeeld: **VMWare vSAN, Starwind vSAN en Microsoft Storage Spaces Direct**. Voorkeur gaat naar VMWare aangezien deze gemakkelijk te gebruiken is, maar Starwind vSAN werkt ook met ESXi. Microsoft Storage Spaces Direct (S2D) werkt dan weer met Hyper-V en Windows datacenter. We bekijken eens de verschillende opties.
+Er zijn een heleboel opties waaruit kan gekozen worden om vSAN te implementeren. Veel gebruikte opties zijn bijvoorbeeld: **VMWare vSAN, Starwind vSAN en Microsoft Storage Spaces Direct**. De voorkeur gaat naar VMWare aangezien deze gemakkelijk te gebruiken is, maar Starwind vSAN werkt ook met ESXi en is goedkoper. Microsoft Storage Spaces Direct (S2D) werkt dan weer met Hyper-V en Windows datacenter dus dit is geen oplossing.
 
 
 ## VMWare vSAN
 
-Hier komt een heleboel uitleg over hoe VMWare vSAN nu eigenlijk werkt.
+Alhoewel VMWare enorm duur is, zijn de oplossingen die ze bieden de beste en gemakkelijkste. Zelf nieuwe gebruikers leren zeer snel werken met VMWare ESXi. In tegenstelling tot KVM is VWWare de meest gebruiksvriendelijke oplossing. Daarom wordt hier in detail bekeken hoe VMWare vSAN in elkaar zit.
 
 ### Objecten
 
-VMWare vSAN zet files in de datastore als objecten die opgeslagen worden over de verschillende disk groups. De verschillende file van een ESXi host kun je vinden [hier](../data-storage/#esxi).
+VMWare vSAN zet files in de datastore als objecten die opgeslagen worden over de verschillende disk groups. Meestal wordt er voor elke file een object gemaakt. Kleine files worden soms ook samen gevoegd tot 1 enkel object. In onderstaande figuur worden de VMX, NVRAM en logs samen gevoegd tot 1 object. VMWare noemt deze files samen het VM Home object. Deze bevat allerlei meta data van de VM.
 
-Meestal gaan we voor elke file een object gaan maken. Kleine files worden soms ook samen gevoegd tot 1 enkel object. Zoals je kan zien hieronder worden de VMX, NVRAM en logs samen gevoegd tot 1 object. VMWare noemt deze files samen het VM Home object. Deze bevat allerlei meta data van de VM.
-
-![img5](./img/objects.png)
+<img src="./img/objects.png" width="400" style="display: block;margin: 0 auto;"/>
 
 ### Disk Groups
 
-Disk groups is een verzamel naam voor verschillende harde schijven. Elke ESXi host kan een maximum van **5 disk groups** hebben. Elke disk group bestaat dan weer uit maximum 8 storage devices. Er zal 1 storage device gebruikt worden als cache, en de andere 7 kunnen gebruikt worden als **capacity**. De capacity bevat de eigenlijke data en de cache wordt gebruikt om READS en WRITES te versnellen.
-
-Je hebt hier 2 opstellingen voor. **Hybrid** en **All Flash**. In een cluster kan maar 1 soort Disk Group bevatten! Het is dus niet mogelijk om een mengeling te hebben van all flash en Hybrid.
+Disk groups (DG) is een verzamel naam voor verschillende harde schijven. Elke ESXi host kan een maximum van **5 disk groups** hebben. Elke disk group bestaat dan weer uit maximum 8 storage devices. Er zal 1 storage device gebruikt worden als cache, de andere 7 kunnen gebruikt worden als **capacity**. De capacity bevat de eigenlijke data en de cache wordt gebruikt om reads en writes te versnellen. Er zijn 2 opstellingen voor disk groups.
 
 #### Hybrid
 
-Bij een hybride oplossing word er gebruikt gemaakt van SSD's en HDD's. Als cache word er een enkele SSD gebruikt, voor capacity worden enkel HDD's gebruikt. De cache wordt als volgt verdeeld 70% ruimte word gebruikt voor READS en 30% voor WRITES.
+Bij een hybride oplossing word er gebruikt gemaakt van SSD's en HDD's. Als cache word er een enkele SSD gebruikt, voor capacity worden enkel HDD's gebruikt. De cache wordt 70% gebruikt voor reads en 30% voor writes.
 
 #### All Flash
 
-Bij een all flash oplossing word er enkel gebruikt gemaakt van SSD's. Dezelfde verdeling geld als bij een Hybride Disk Group alleen word de cache nu enkel nog maar gebruikt om te schrijven naar de capacity. De cache wordt dus enkel gebruikt voor WRITES in een all flash set up.
+Bij een all flash oplossing word er enkel gebruikt gemaakt van SSD's. Dezelfde verdeling geld als bij een hybride disk group alleen word de cache nu enkel nog maar gebruikt om te schrijven naar de capacity. De cache wordt dus enkel gebruikt voor writes in een all flash set up.
 
 ---
 
 ### Data placement
 
-Hoe precies wordt de data verdeeld in een vmware vSAN? Hier zal ik even de verschillende stappen overlopen die gebeuren als er data ingelezen of geschreven wordt. 
+Het is belangrijk om te weten hoe de data wordt verdeeld over verschillende ESXi hosts. Hier worden de verschillende stappen overlopen die gebeuren wanneer er data ingelezen of geschreven wordt
 
 #### Stappen:
 
@@ -114,33 +105,39 @@ Hoe precies wordt de data verdeeld in een vmware vSAN? Hier zal ik even de versc
 
 ![img6](./img/data-placement.png)
 
-Waar precies het vSAN process de Reads en Writes naar toe stuurt hangt er van af. Het vSAN process zal de blocken data van de VMDK file gaan verspreiden over het netwerk. Het kan dus zijn dat er een blocken data op verschillende disk groups zitten. Het vSAN process onthoud waar alles bewaard wordt. Zodat wanneer een read of write zich voort doet het process weet naar welke host het moet sturen.
+Waar precies het vSAN process de reads en writes naar toe stuurt hangt er van af. Het vSAN process zal de blokken data van de VMDK file gaan verspreiden over het netwerk. Het vSAN process onthoudt waar alles bewaard wordt. Zodat wanneer een read of write zich voort doet het process weet naar welke host het moet sturen.
 
 ---
 
 ### Failures to tolerate
 
-FTT of Failures To Tolerate staat voor het aantal fouten die zich mogen voordoen in een vSAN. Wanneer de FTT bijvoorbeeld gelijk is aan 1 dan wil dat zeggen dat zelf als er 1 fysieke component weg valt de virtuele machine nog steeds toegang heeft tot die component.
+Failures To Tolerate of FTT staat voor het aantal fouten die zich mogen voordoen in een vSAN. Wanneer bijvoorbeeld de FTT gelijk is aan 1 dan wil dat zeggen dat zelf als er 1 fysieke component weg valt de virtuele machine nog steeds toegang heeft tot die component.
 
-Hoe zou de data verspreid worden over het netwerk als we een FTT gelijk aan 1 zouden hebben? We zouden een raid 1 set up kunnen gebruiken. Dit wil zeggen dat de data gewoon 2 maal wordt opgeslagen op verschillende locaties. Dit wordt ook een **2 node setup** genoemd aangezien we slechts op 2 plekken opslaan. Voor een 2 node setup hebben ook nog een derde host nodig die de Witness zal zijn.
+Hoe zou de data verspreid worden over het netwerk als er een FTT gelijk aan 1 zou zijn? Een RAID 1 methode zou kunnen gebruikt worden. Dit wil zeggen dat de data 2 maal wordt opgeslagen op verschillende locaties. Dit wordt ook een **2 node setup** genoemd aangezien er op 2 plekken data wordt opgeslagen. Voor een 2 node setup hebben ook nog een derde host nodig die de Witness zal zijn.
 
 
 #### Witness
 
-Waarom is de witness nodig? Omdat anders kan het zijn dat de 2 hosts out of sync zijn en de verschillen bij elkaar niet zien. Dan krijgen we een **split brain** situatie. In zo een situatie weet het vSAN process niet meer welke van de 2 hosts nu de correcte data bevat. Daarom moet er een derde host zijn die de verschillen bijhoud van beide om zo de beste beslissing te kunnen maken.
+Waarom is de witness nodig? Omdat anders kan het zijn dat de 2 hosts niet gesynchroniseerd zijn en de verschillen bij elkaar niet zien. Dan is er een **split brain** situatie. In zo een situatie weet het vSAN process niet meer welke van de 2 hosts nu de correcte data bevat. Daarom moet er een derde host zijn die de verschillen bijhoud van beide om zo de beste beslissing te kunnen maken.
 
 De witness zelf slaat geen data op van de virtuele machine maar zal enkel metadata gaan opslaan. Deze data wordt ook de **Witness Component** genoemd in een vSAN en is ongeveer 4 MB groot.
 
 
 #### Schema
 
-Op de afbeelding kun je de verschillende hosts zien en wat er precies gebeurt als de VM wil schrijven of lezen naar de VMDK file. Het is gelijkaardig met de afbeelding van data placement maar er zijn nog een paar kleine verschillen.
+Op de afbeelding kun worden verschillende hosts voorgesteld om te zien en wat er precies gebeurt als de VM wil schrijven of lezen naar de VMDK file wanneer deze een FTT hebben van 1. Het is gelijkaardig met de afbeelding van data placement maar er zijn nog een paar kleine verschillen.
 
 1. De stappen van de VM tot het vSAN process zijn identiek
-2. Het vSAN process stuurt de WRITE of READ door naar **alle hosts** die de data bevatten.
+2. Het vSAN process stuurt de write of read door naar **alle hosts** die de data bevatten.
 3. Elke host stuurt dan een acknowledgement terug naar de host die de VM bevat
 4. Pas wanneer elke host terug stuurt zal het vSAN process de acknowledgement doorgeven aan de kernel
 
 ![img7](./img/ftt.png)
 
----
+## Pricing
+
+Nu één van de belangrijkste aspecten is de prijs van de oplossing. Als er gekeken wordt naar de prijs van VMWare vSAN dan valt het op dat de prijzen enorm hoog zijn. VMWare is een bedrijf die zich meer zal focussen op grotere bedrijven die honderden virtuele machines moeten beheren. VMWare vSAN wordt voorlopig uitgesloten omdat de prijs gewoon veel te hoog voor zo'n klein bedrijf als Dataline.
+
+Starwind vSAN aan de andere kant is meer gericht op kleinere bedrijven die niet te veel willen betalen voor een vSAN oplossing. Daarom zou Starwind vSAN een ideaal alternatief zijn. Maar er moet niet alleen gekeken worden naar prijs, kwaliteit is ook belangrijk. VMWare is een zeer gekende speler op het vlak van vSAN, maar Starwind is minder bekend. Daarom is het belangrijk dat de Starwind vSAN eerst getest wordt op een omgeving om te kijken hoe goed het nu eigenlijk echt werkt.
+
+In volgend hoofdstuk wordt dieper ingegaan op de werking van Starwind vSAN en wordt een test omgeving opgesteld.

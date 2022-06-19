@@ -119,13 +119,13 @@ ESXi gebruikt een heleboel bestanden om Virtuele machine te gaan voorstellen. In
 <!-- 
 Om een backup te maken van een virtuele machine worden deze bestanden gekopieerd naar de backup server. -->
 
-Een probleem dat Dataline nu nog heeft is op het vlak van storage. De telefonie servers draaien allemaal op virtuele machines. Elke virtuele machine bestaat uit een aantal bestanden die de status van de machine voorstelt. Als beveiliging worden er back ups genomen van die bestanden. Deze aanpak heeft echter enkele nadelen:
+Een probleem dat Dataline nu nog heeft op het vlak van storage is met de telefonie servers. Deze draaien allemaal op virtuele machines. Elke virtuele machine bestaat uit een aantal bestanden die de status van de machine voorstelt. Als beveiliging worden er back ups genomen van die bestanden. Deze aanpak heeft echter enkele nadelen:
 
 - Er is een single point of failure in de telefonie servers. Als 1 iets kapot gaat kunnen mensen niet meer telefoneren.
 - Back ups nemen is lastig
-- Er zijn maar een paar mensen die weten hoe je een virtuele machine moet herstellen van een back up.
+- Er zijn maar een paar mensen die weten hoe een virtuele machine herstelt kan worden van een back up.
 
-We moeten dus een manier vinden om de bestanden van de VM te beveiligen tegen wanneer er iets misloopt. Dit moet een process zijn dat automatisch gebeurt.
+Er moet een manier zijn om de bestanden van de VM te beveiligen tegen wanneer er iets misloopt. Dit moet een process zijn dat automatisch gebeurt.
 
 
 <!-- ## Probleem met backups
@@ -143,12 +143,8 @@ Het nemen van backups van de telefonie servers is zeer lastig omdat er telkens e
 
 ### SAN
 
-Een SAN is een storage area network. Je kan het zien als een apart netwerk speciaal gemaakt om de storage op een centrale plek op te kunnen slaan. Servers communiceren dan via dit netwerk om gebruik te maken van storage.
+Een SAN is een storage area network. Het is een apart netwerk speciaal gemaakt om de storage op een centrale plek op te kunnen slaan. Servers communiceren dan via dit netwerk om gebruik te maken van storage.
 
-Dit is de ideale oplossing om de virtuele machines bestendig te maken tegen fouten. De reden hiervoor is omdat we in een SAN data 2 maal kunnen opslaan. Wanneer er een fout gebeurt met de storage hebben we nog een kopie die wel werkt. Dit process kan automatisch gebeuren en er hoeft niet iemand manueel tussen te komen.
+Dit is de ideale oplossing om de virtuele machines bestendig te maken tegen fouten. De reden hiervoor is omdat in een SAN data 2 maal kunnen opslaan. Wanneer er iets misloopt met de storage is er altijd nog een kopie van de data. Dit process kan automatisch gebeuren en er hoeft niemand manueel tussen te komen.
 
-### vSAN
-
-Een gekend alternatief voor SAN is een vSAN dit is een virtuele SAN die de storage van verschillende servers zal vitualiseren tot een enkele SAN datastore. Het werkt gelijkaardig als een SAN alleen is er geen nood om speciale apparatuur hiervoor te kopen. Er zijn verschillende opties om een vSAN te implementeren zoals VMWare vSAN en Starwind vSAN.
-
-VMWare vSAN kan nogal duur zijn daarom dat starwind misshien beter zou zijn. Dit wordt het best eens uitgetest.
+Deze oplossing wordt verder uitgediept in het volgende hoofdstuk.

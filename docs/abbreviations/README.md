@@ -13,4 +13,4 @@ Onderstaande tabel geeft een alfabetische lijst terug met alle afkortingen die i
 | CPU | Central Processing Unit |
 | FTT | Failures To Tolerate |
 | NIC | Network Interface Card |
-
+| DG | Disk Group |
