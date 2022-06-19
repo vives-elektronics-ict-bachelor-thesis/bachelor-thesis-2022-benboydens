@@ -12,7 +12,7 @@ Deze 2 accounts hebben aparte wachtwoorden en dit kan lastig zijn voor gebruiker
 
 Azure Active Directory (Azure AD) is een identiteits- en toegangsbeheerservice in de cloud. Het helpt om werknemers toegang te geven tot externe resources zoals Office 365 en andere cloud toepassingen.
 
-![Azure AD diagram](./img/azure-ad-diagram.png)
+<img src="./img/azure-ad-diagram.png" height="330" style="display: block;margin: 0 auto;"/>
 
 Zoals je kan zien in de figuur dient Azure AD als een centrale plek die dient om de gebruiker accounts overal te verspreiden. Wat wij moeten gaan realiseren is de pijl tussen de **on-premises** en **Azure AD**.
 Microsoft geeft ons een heleboel manieren om dit probleem aan te pakken. Hier worden de opties overlopen om tot de juiste conclusie te komen.
@@ -30,7 +30,7 @@ Om gebruikers te gaan identificeren is een oplossing nodig die werkt on premise 
 
 De hash waarde van het wachtwoord in Active Directory zal gesynchroniseerd worden met een hash die word opgeslagen in de cloud. Zo kunnen gebruikers inloggen in de cloud met hetzelfde wachtwoord. Dit is de standaard methode om authenticatie te gaan doen en het is ook de gemakkelijkste manier.
 
-<img src="./img/arch1.png" style="display: block;margin: 0 auto;"/>
+<img src="./img/arch1.png" height="350" style="display: block;margin: 0 auto;"/>
 
 Password hash sync heeft ook een optie **Leaked credential detection**. Microsoft werkt samen met dark web onderzoekers en law enforcement agencies om gelekte credentials te vinden. Als Microsoft merkt dat er wachtwoorden van jouw organisatie tussen zitten dan wordt er een melding gegeven.
 
@@ -46,7 +46,7 @@ Een voordeel hiervan t.o.v. password hash sync is dat alle authenticatie nu gebe
 
 Deze aanpak gebruikt een aparte vertrouwde server om de authenticatie te gaan doen. Mensen die van buiten af toegang willen tot de cloud moeten zich eerst authenticeren bij die server. Mensen die lokaal proberen in te loggen kunnen gewoon gebruik maken van de on premise active directory.
 
-<img src="./img/federated-identity.png" style="display: block;margin: 0 auto;"/>
+<img src="./img/federated-identity.png" height="320" style="display: block;margin: 0 auto;"/>
 
 Het grote voordeel van Federation is dat er enorm veel vrijheid is om de authenticatie te gaan doen. De andere 2 methoden zijn standaard methoden van microsoft die beperkte functionaliteit hebben. Zo kun je bijvoorbeeld met federation smartcard authenticatie implementeren wat niet mogelijk is met de andere methoden.
 
@@ -89,14 +89,17 @@ Dataline wil de Active Directory synchroniseren met Azure AD. Dit noemt provisio
 
 Er zijn 2 opties om automatic user en groep provisioning te gaan doen.
 
-| Optie  | Beschrijving |
-| :---: | :--- |
-| **Azure AD connect sync**  | Veel support en is robust, zeker een optie. Kan moeilijk zijn om te configureren en kostelijk om te onderhouden. Heeft ook een grote investering nodig op vlak van infrastructuur (sterke server nodig voor synchronisatie). |
-| **Azure AD connect cloud sync** | Nieuwste optie support, zeer snel en makkelijk op te zetten. Hoge availability.  Is lightweight dus geen nood aan een sterke server voor de synchronisatie. |
+### Azure AD connect sync
 
-Er is niet echt een goede server om de Connect Sync server te runnen en de extra features van Connect Sync zijn niet echt nodig. De belangrijkste feature was password writeback en deze word ondersteunt door beide. Daarom gaat de voorkeur naar de Cloud Sync methode.
+Veel agent heeft goede support en is robust, zeker een mogelijke optie. Kan moeilijk zijn om te configureren en kostelijk om te onderhouden. Heeft ook een grote investering nodig op vlak van infrastructuur (sterke server nodig voor synchronisatie).
 
-Een volledige lijst met alle verschillen tussen de 2 kun je vinden in de Microsoft Docs [hier](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/what-is-cloud-sync#comparison-between-azure-ad-connect-and-cloud-sync)
+### Azure AD connect cloud sync
+
+Nieuwste optie support, zeer snel en makkelijk op te zetten. Hoge availability. Is lightweight dus geen nood aan een sterke server voor de synchronisatie.
+
+### Besluit
+
+Er is niet echt een goede server om de Connect Sync server te runnen en de extra features van Connect Sync zijn niet echt nodig. De belangrijkste feature was password writeback en deze word ondersteunt door beide. Daarom gaat de voorkeur naar de Cloud Sync methode. Een volledige lijst met alle verschillen tussen de 2 kun je vinden in de Microsoft Docs [hier](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/what-is-cloud-sync#comparison-between-azure-ad-connect-and-cloud-sync)
 
 
 

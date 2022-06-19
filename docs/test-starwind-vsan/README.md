@@ -2,6 +2,7 @@
 
 Starwind vSAN is een bekende speler op de markt van Hyper Converged Infrastructure. Hun oplossing voor vSAN zou ideaal zijn voor Dataline aangezien er geen dure VMWare licenties nodig zijn. Maar de vraag is natuurlijk hoe goed is Starwind vSAN? Als eens gekeken wordt naar de reviews dan zijn er veel bedrijven tevreden met Starwind vSAN. Om te zijn van ons stuk wordt een test opstelling opgezet, hier wordt de performance, efficiëntie en kwaliteit van Starwind vSAN onder de loep genomen. 
 
+<br />
 
 ## Opstelling
 
@@ -18,6 +19,7 @@ In totaal zullen er 3 verbindingen nodig zijn op de nodes:
 
 Het iSCSI/heartbeat en synchronisatie kanaal wordt gebruikt om data en commando's door te geven tussen de hosts. Deze verbindingen gebeuren best met de nieuwe netwerkkaart zodat de data zo snel mogelijk kan gesynchroniseerd worden. Management is bedoeld als aanspreekpunt voor het beheren van de ESXi host en Virtuele machines.
 
+<br />
 
 ## Failover strategie
 
@@ -28,6 +30,15 @@ Bij het geval dat de verbinding tussen 2 nodes zou weg vallen door een netwerk p
 In deze situatie zal elke node naar zijn eigen storage schrijven. Zo ontstaan er data inconsistenties tussen de 2 nodes waardoor ze steeds meer van elkaar gaan verschillen. Uiteindelijk gaan ze zoveel met elkaar verschillen dat de data niet meer gesynchroniseerd kan worden.
 
 Als moet hersteld worden dan zal een node moeten gekozen worden om verder op te werken. Alle wijzigingen van de andere node worden daardoor ongedaan gemaakt. Het risico van een split brain scenario moet daarom zo laag mogelijk zijn. Starwind vSAN geeft ons 2 manieren om zo'n scenario te vermijden. 
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 ### Heartbeat
 
@@ -43,6 +54,11 @@ Stel bijvoorbeeld dat er 2 nodes zijn zoals in de figuur en de data kan niet ver
 Indien alle verbindingen (heartbeat + synchronisatie) verbroken worden tussen de 2 hosts dan zal er een split brain situatie ontstaan. Starwind vSAN probeert dit probleem te minimaliseren door toe te laten dat de heartbeat verbinding over het management netwerk gaat. Starwind raad deze aanpak enkel aan wanneer er meerdere heartbeat verbindingen zijn.
 
 > To summarize, this kind of strategy is mostly applicable to the systems where you have enough network links that can be used as the additional heartbeat channels and are physically separated from the primary ones. [Starwind](https://www.starwindsoftware.com/blog/whats-split-brain-and-how-to-avoid-it)
+
+<br />
+<br />
+<br />
+<br />
 
 ### Node majority
 
@@ -67,7 +83,7 @@ Stel bovenstaande configuratie wordt gebruikt en de synchronisatie valt weg. Dan
 - Bij 2 node setup is een derde witness node nodig
 - met 3 nodes mag er maar 1 failure voorkomen
 
-
+<br />
 
 ## Synchronisatie test
 
@@ -79,6 +95,7 @@ Om te kijken of de synchronisatie tussen de nodes gebeurt moeten er eens gecontr
 
 Dit lukt zonder problemen en alles werkt zoals verwacht.
 
+<br />
 
 ## Fio
 
@@ -99,6 +116,8 @@ Om de verschillende scenario's van de storage te controleren gaan er 4 soorten t
 
 Alle testen worden rechtstreeks op de storage uitgevoerd behalve de file random reads/writes. Deze test zal IO operaties doen op een file. Het verschil met rechtstreeks werken is dat hier het besturingssysteem nog tussen komt. Er wordt dus verwacht dat deze test iets trager zullen zijn.
 
+<br />
+
 ## Performance testen
 
 Storage is de traagste factor van elke computer, daarom is de performance van storage zeer belangrijk voor virtuele machines. Om te kijken of Starwind vSAN een goede optie zou zijn, moeten er gecontroleerd worden hoe efficient Starwind omgaat met storage. Een heleboel factoren hebben invloed hebben op de performance van vSAN, dus het is belangrijk om verschillende opstellingen te testen en te kijken wat het beste optie is
@@ -110,6 +129,7 @@ Er zijn 3 scenario's die interessant zijn om te testen voor performance:
 
 De laatste test is belangrijk want deze stelt het scenario voor dat een lokaal storage device niet meer beschikbaar zou zijn. De virtuele machine zal dan over het netwerk IO operaties doen met behulp van iSCSI. Op deze manier zal de virtuele machine nooit down komen te staan.
 
+<br />
 
 ### Lokale Datastore
 
@@ -118,6 +138,9 @@ Er wordt een vm op de lokale datastore opgestart. Met deze opstelling zal de ban
 <br />
 
 <img src="./img/performance_test_local.png" width="650" style="display: block;margin: 0 auto;"/>
+
+<br />
+<br />
 
 #### Resultaten
 
@@ -169,6 +192,9 @@ Er wordt een vm op de vSAN datastore opgestart. Met deze opstelling zal nog stee
 | Random Reads | 109,12 µs | / |
 | Random reads/writes | 266,03 µs | 406,39 µs |
 
+
+<br />
+
 ### Via iSCSI verbinding
 
 Deze keer wordt de Starwind vSAN node afgesloten op de host. Dit zorgt dat de vm geen toegang meer zal hebben tot de lokale SSD. De vm moet nu via de vSAN datastore IO operaties gaan uitvoeren op de andere Starwind node. Het zal dit doet doen aan de hand van iSCSI commando's. De iSCSI verbinding gaat over de nieuwe snelle netwerk kaart (25 Gbps), hierdoor zou er niet zo'n groot verschil mogen zijn ten opzichte van de vSAN datastore.
@@ -176,6 +202,11 @@ Deze keer wordt de Starwind vSAN node afgesloten op de host. Dit zorgt dat de vm
 <br />
 
 <img src="./img/performance_test_vsan-iscsi.png" width="650" style="display: block;margin: 0 auto;"/>
+
+
+<br />
+<br />
+<br />
 
 #### Resultaten
 
@@ -198,6 +229,9 @@ Deze keer wordt de Starwind vSAN node afgesloten op de host. Dit zorgt dat de vm
 | Random Reads | 110,83 µs | / |
 | Random reads/writes | 267,58 µs | 212,2 µs |
 
+
+<br />
+
 ## Conclusie
 
 Om uit deze testen een conclusie te halen worden de resultaten eens op een rij gezet.
@@ -206,21 +240,28 @@ Om uit deze testen een conclusie te halen worden de resultaten eens op een rij g
 In de testen hierboven zijn de resultaten van de **random reads** en **sequential reads** enorm groot. Zo groot zelf dat ze sneller zijn dan de SSD. Dit is mogelijks te wijten aan caching van de storage. Deze resultaten zullen om die reden niet meegerekend worden in de conclusie.
 :::
 
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
 ### IOPS
 
 In de onderstaande grafiek wordt gekeken naar het gemiddelde aantal IOPS voor elk scenario. Hier kan er gezien worden dat het aantal IOPS duidelijk hoger zal zijn wanneer een lokale datastore wordt gebruikt. Dit is logisch aangezien dat met een lokale datastore de IO requests sneller de SSD zullen bereiken.
 
-![iops compared](./img/average_iops_compared.png)
+<img src="./img/average_iops_compared.png" height="350" style="display: block;margin: 0 auto;"/>
 
 ### Bandbreedte
 
 Hier wordt gekeken naar de gemiddelde bandbreedte voor elk scenario. Het valt op dat er weinig verschil is tussen de verschillende methoden. Dit is te wijten aan het feit dat voor de bandbreedte test grotere blokken data worden opgevraagd. Dit zorgt dat er minder IO operaties moeten gebeuren waardoor het verschil tussen de 3 minder merkbaar is.
 
-![iops compared](./img/average_bw_compared.png)
+<img src="./img/average_bw_compared.png" height="350" style="display: block;margin: 0 auto;"/>
 
 ### Latency
 
 In de onderstaande grafiek wordt gekeken naar de tijd dat de SSD erover doet om een IO request te voldoen. Er is een duidelijk verschil namelijk dat requests op de lokale datastore sneller worden beantwoord. Net zoals bij de IOPS zullen requests sneller de SSD bereiken met een lokale datastore.
 
-![iops compared](./img/average_lat_compared.png)
+<img src="./img/average_lat_compared.png" height="350" style="display: block;margin: 0 auto;"/>
 

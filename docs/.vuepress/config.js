@@ -22,7 +22,6 @@ module.exports = {
       '/san-vs-vsan',
       '/test-starwind-vsan',
       '/conclusion/',
-      '/attachments/',
       '/abbreviations/',
       '/bibliography/',
     ]

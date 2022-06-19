@@ -1,23 +1,21 @@
 # Introductie
 
-<!-- TODO: Vergeet niet om alle bronnen in je bibliografie te plaatsen -->
-
 Heel wat bedrijven gebruiken nog lokale servers om hun applicaties en data op te slaan. Dit geeft hen veel controle over wat er gebeurt met hun IT omgeving, maar heeft ook zijn nadelen. Zoals het feit dat het bedrijf een team moet samen stellen om dit op te onderhouden. Ook kan het zeer kostelijk zijn om uit te breiden en nieuwe apparatuur aan te kopen. Een alternatief hiervoor is **Cloud computing** en het wordt steeds populairder. [Sumina, 2022](https://www.cloudwards.net/cloud-computing-statistics/).
 
-<img src="./img/Cloud-Computing-Stats-By-the-Numbers.png" height="500" style="display: block;margin: 0 auto;border:1px solid gray"/>
+<img src="./img/Cloud-Computing-Stats-By-the-Numbers.png" height="450" style="display: block;margin: 0 auto;border:1px solid gray"/>
 
 Een groot voordeel van Cloud computing is dat het zeer flexibel is. Werken in de cloud is veel simpeler om de omgeving up-to-date te houden en te gaan uitbreiden. Stel dat er nood is aan extra bandbreedte of storage, dan kan de cloud direct aan die vraag voldoen, in plaats van een complexe (en dure) update van de IT-infrastructuur te ondergaan.
 
-Aan de andere kant kan cloud computing duur zijn, elke maand moet er een som betaalt worden en na een lange periode lopen die kosten op. Wanneer er lokaal gewerkt is dit niet, daarom dat lokaal werken op lange termijn goedkoper is. Het is dus zeer belangrijk om te kijken welke applicaties mogen blijven en welke beter naar de cloud vertrekken. In onderstaande figuur is er een vergelijking van de kost tussen de 2 te zien. [Fisher, 2018](https://www.scirp.org/html/7-2121263_87661.htm)
+Aan de andere kant kan cloud computing duur zijn, elke maand moet er een som betaalt worden en na een lange periode lopen die kosten op. Wanneer er lokaal gewerkt is dit niet, daarom dat lokaal werken op lange termijn goedkoper is. Het is dus zeer belangrijk om te kijken welke applicaties mogen blijven en welke beter naar de cloud vertrekken. In grafiek is er een vergelijking van de kost tussen de 2 te zien. [Fisher, 2018](https://www.scirp.org/html/7-2121263_87661.htm)
 
-<img src="./img/cloud_vs_on_prem_cost.png" height="350" style="display: block;margin: 0 auto;"/>
+<img src="./img/cloud_vs_on_prem_cost.png" height="250" style="display: block;margin: 0 auto;"/>
 
 Een ander belangrijk aspect is fouttolerantie. Het kan altijd gebeuren dat een applicatie of service plots niet meer werkt. In dat geval moet er een alternatief zijn om snel de services terug up and running te krijgen. 
 Er moet dus vermeden worden dat er een **Single Point Of Failure** bestaat. Zodat wanneer één iets kapot gaat er direct een alternatief is die de taak kan overnemen. Een manier om applicaties en data fouttolerant te maken zou kunnen zijn om alles meerdere malen te gaan opslaan. Dit noemt men in het Engels ook **Redundancy** (overbodigheid).
 
 Bijvoorbeeld met een RAID configuratie kan data worden gedupliceerd over meerdere harde schijven. Dit zorgt dat de er altijd een kopie wordt gemaakt.
 
-<img src="./img/Raid1.jpg" height="300" style="display: block;margin: 0 auto;"/>
+<img src="./img/Raid1.jpg" height="250" style="display: block;margin: 0 auto;"/>
 
 Er zijn 3 opties waartussen een bedrijf kan kiezen om hun applicaties en data op te slaan. 
 

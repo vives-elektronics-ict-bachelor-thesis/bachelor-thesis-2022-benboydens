@@ -2,6 +2,8 @@
 
 Zoals vele bedrijven heeft Dataline hun eigen mail server. Die mail server zou ook naar de cloud kunnen worden gebracht. Er moet moet gekeken worden naar wat de opties zijn. Zal dezelfde software gebruikt worden in de cloud of is het beter dat er overgestapt wordt naar een ander alternatief? Dat zijn vragen die in dit hoofdstuk beantwoord zullen worden.
 
+<br/>
+
 ## Kerio Connect
 
 Nu wordt er gebruikt gemaakt van een Kerio Connect server. Kerio Connect is een product van GFI software die veilige mail services en kalender diensten voor een lage prijs zal aanbieden. Lokaal op Dataline zijn er 2 servers namelijk een een lokale Kerio Connect Mail server en een Mail filter server. 
@@ -20,6 +22,8 @@ Het aantal licenties die nu gebruikt worden zijn in totaal 100. Er worden zo vee
 | Prijs per gebruiker per jaar | €32,50 | €29,50 | €26,50 |
 
 Met 100 gebruikers en een Medium abonnement zou de prijs neer komen op een totaal van **€2950 per jaar**. Dat is niet de prijs inbegrepen van de mail filter server en de kosten om die server zelf draaiende te houden. Maar voor 100 licenties is dit wel enorm goedkoop.
+
+<br />
 
 ## Kerio Cloud
 

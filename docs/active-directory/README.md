@@ -2,7 +2,6 @@
 
 Active Directory is de naam die word gegeven aan de directory service van Microsoft voor een Windows domein. Het komt inbegrepen bij meeste Windows Servers als een verzameling van services. Een Windows server die Active Directory draait staat ook gekend als een **domeincontroller**.
 
-<!-- TODO verhaal van wat active directory betekent voor Dataline, hoe wordt het nu gebruikt enzo aanvullen -->
 ## Domeincontroller
 
 De domeincontroller (dc) is een Windows Server waar alle gebruikers en computers worden in opgeslagen. Het zal de gebruikers en computers gaan authenticeren en autoriseren in een Windows domein. Bijvoorbeeld als iemand inlogt met een windows computer die lid is van het domein dan zal de domeincontroller de ingegeven gebruikersnaam hey wachtwoord controleren.

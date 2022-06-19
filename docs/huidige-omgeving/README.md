@@ -8,7 +8,7 @@ Hieronder bevindt zich een oplijsting van alle applicaties, de virtuele machines
 
 ## Confluence
 
-Confluence is een content management systeem van Atlassian. Het is simpel gezegd een plek waar mensen documenten kunnen aanmaken en delen met elkaar. Het wordt door iedere werknemer gebruikt en bevat een heleboel belangrijke documenten. 
+Confluence is een content management systeem van Atlassian. Het is simpel gezegd een plek waar mensen documenten kunnen aanmaken en delen met elkaar. Het wordt door iedere werknemer gebruikt en bevat belangrijke documenten. 
 De versie die nu gebruikt wordt van Confluence is de Server editie. Atlassian zelf wil afstappen van de lokale server editie en daarom verplichten ze de gebruikers om naar de cloud over te stappen.
 
 Er moet bekeken worden hoe Confluence zal gebracht worden naar de cloud zodat de gebruikers een transparante overgang ondervinden en dat alle huidige data veilig bewaart word. 
@@ -36,7 +36,7 @@ Er zijn 2 windows Servers die instaan voor het beheer van Active Directory in Da
 
 ## Mail server
 
-Dataline heeft een eigen mail server en een mail filter server. De mail server is een GFI Kerio connect mail server. Dit is een mail oplossing voor kleinere bedrijven die niet te veel geld willen investeren voor een mail oplossing. De mail filter server wordt gebruikt om binnenkomende emails te gaan filteren. Het doet dit op basis van een aantal regels en de geschiedenis van de emails die binnen zijn gekomen. Het heeft een black list en een white list van email adressen.
+Dataline heeft een eigen mail server en een mail filter server. De mail server is een GFI Kerio connect mail server. Dit is een mail oplossing voor kleinere bedrijven die niet te veel geld willen investeren voor een mail oplossing. De mail filter server wordt gebruikt om binnenkomende e-mails te gaan filteren. Het doet dit op basis van een aantal regels en de geschiedenis van de e-mails die binnen zijn gekomen. Het heeft een black list en een white list van email adressen.
 
 Een mogelijkheid is om over te stappen op Microsoft Outlook. Deze oplossing heeft al een ingebouwde mail filter. 
 
@@ -55,7 +55,7 @@ Dit gebeurt door te kijken naar de back ups van die servers en dan zo de server 
 
 ## File server
 
-De file server wordt voornamelijk gebruikt in Dataline door het marketing team. Daar wordt er vaak gebruikt gemaakt van zeer grote bestanden die moeten gedeeld worden via deze server. De grote van deze server is 6,5 TB.
+De file server wordt voornamelijk gebruikt in Dataline door het marketing team. Daar wordt er gebruikt gemaakt van zeer grote bestanden die moeten gedeeld worden via deze server. De grote van deze server is 6,5 TB.
 
 Er is een mogelijkheid om de server gedeeltelijk naar de cloud te migreren. Dit zou de fileserver makkelijker toegankelijk maken aangezien mensen dan ook thuis toegang zouden hebben. De file server zelf is een SAMBA file share die gekoppeld wordt met LDAP. De koppeling met LDAP zorgt dat mensen zich eerst moeten inloggen met hun gebruikers account.
 
