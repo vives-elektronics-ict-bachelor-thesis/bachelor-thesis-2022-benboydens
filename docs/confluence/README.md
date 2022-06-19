@@ -12,21 +12,21 @@ De huidige omgeving van Confluence moet klaar gemaakt worden om naar de cloud te
 
 ### Groepen
 
-Confluence heeft de optie om groepen te gaan gebruiken van in Active Directory. Nu is er een mengeling van confluence groepen en AD groepen. We moeten dus overstappen naar alleen AD groepen. Dit is een handige feature want wanneer we een werknemer lid willen maken van een groep dan kunnen we dit doen op de domain controller en hoeft dit niet apart te gebeuren in Confluence. 
+Confluence heeft de optie om groepen te gaan gebruiken van in Active Directory. Nu is er een mengeling van confluence groepen en AD groepen. Er moet overgestapt worden naar enkel AD groepen. Dit is een handige feature want wanneer een werknemer lid moet worden van een groep dan kan dit op de domain controller gedaan worden en hoeft dit niet apart te gebeuren in Confluence. 
 
-![groups](./img/groups-confluence.png)
+<img src="./img/groups-confluence.png" width="300" style="display: block;margin: 0 auto;"/>
 
-Group A is een Confluence groep terwijl group B een Active Directory groep is.
+In de afbeelding hierboven is groep A is een Confluence groep terwijl groep B een Active Directory groep is.
 
 ## Permissies
 
-Permissies kunnen toegekend worden aan **groepen** of aan **individuele gebruikers**. De Confluence omgeving van Dataline heeft nu een heleboel individuele permissies die weg moeten. Het is best practise om permissies te gaan toekennen per groep omdat we zo eenvoudig permissies kunnen geven en afnemen. Ook als we naar de cloud gaan met Confluence dan is het nodig dat permissies alleen via groepen worden uitgedeeld.
+Permissies kunnen toegekend worden aan **groepen** of aan **individuele gebruikers**. De Confluence omgeving van Dataline heeft nu een heleboel individuele permissies die weg moeten. De beste manier om te werken is door permissies te gaan toekennen per groep, omdat het zo eenvoudig is om permissies te geven en afnemen. Ook wanneer Confluence naar de cloud gaat dan is het nodig dat permissies alleen via groepen worden uitgedeeld.
 
-In Confluence zijn permissies **additief**. Als iemand lid is van meerdere groepen (A, B, C, etc), dan is wat ze zullen kunnen zien de som van de machtigingen die zijn verleend aan Groep A + Groep B + Groep C.
+In Confluence zijn permissies **additief**. Als iemand lid is van meerdere groepen (A, B, C, etc), dan is wat ze doen de som van de machtigingen die zijn verleend aan Groep A + Groep B + Groep C.
 
 ### Space permissies
 
-Als je een admin bent van een space dan kun je een heleboel permissies toekennen voor die space, zoals wie wat kan zien en wat ze ermee kunnen doen. De space permissies worden toegekend aan alles in de space. 
+Admins van een space dan kunnen een heleboel permissies toekennen voor die space, zoals wie wat kan zien en wat ze ermee kunnen doen. De space permissies worden toegekend aan alles in de space. 
 
 Permissies in een space kunnen gegeven worden aan individuele gebruikers en groepen:
 
@@ -43,9 +43,9 @@ Elke pagina in Confluence bevindt zich in een space, en space permissies geven d
 
 Het doel is om alle groepen in Confluence Active Directory groepen te maken. Nu zijn er nog een aantal groepen die enkel in Confluence zitten en die groepen hebben bijhorende permissies. Het is niet mogelijk om een nieuwe AD groep te linken met een bestaande Confluence groep. Daarom moeten de permissies van de Confluence groep overgezet worden naar een nieuwe AD groep.
 
-![permissions confluence](./img/permissions-confluence.png)
+<img src="./img/permissions-confluence.png" width="500" style="display: block;margin: 0 auto;"/>
 
-Zoals je kan zien worden de permissies van groep A overgezet naar de Active directory groep C. De groep A wordt dan verwijdert vanuit Confluence. Het overzetten van de permissies moet gebeuren aan de hand van een SQL query omdat Atlassian deze functionaliteit nog niet geïmplementeerd heeft.
+De permissies van groep A worden overgezet naar de Active directory groep C. De groep A wordt dan verwijdert vanuit Confluence. Het overzetten van de permissies moet gebeuren aan de hand van een SQL query omdat Atlassian deze functionaliteit nog niet geïmplementeerd heeft.
 
 
 ## Confluence Producten
@@ -56,7 +56,7 @@ Confluence stopt support voor de standaard server producten. Dat is de versie di
 - Datacenter editie
 - Cloud editie
 
-De server editite stopt in 2024 en Atlassian verplicht mensen om over te stappen naar de Datacenter of Cloud editie. De cloud editite meer programma's heeft waar we tussen kunnen kiezen:
+De server editie stopt in 2024 en Atlassian verplicht mensen om over te stappen naar de Datacenter of Cloud editie. De cloud editie meerdere programma's om tussen te kiezen:
 
 | | Free | Standard | Premium | Enterprise |
 | :--- | :---: | :---: | :---: | :---: |
@@ -65,13 +65,13 @@ De server editite stopt in 2024 en Atlassian verplicht mensen om over te stappen
 | Max aantal gebruikers | 10 | 20.000 | 20.000 | 20.000 |
 | Storage | 2 GB | 250 GB | unlimited | unlimited |
 
-Dan hebben we ook nog de Datacenter versie die $27.000 kost per jaar. Daarmee krijgen we het volledige pakket en kunnen we nog lokaal on-premise blijven werken. Atlassian zegt zelf het volgende
+Dan hebben is er ook nog de Datacenter versie die $27.000 kost per jaar. Daarin zit alle functionaliteit en kan er nog lokaal on-premise gewerkt worden. Atlassian zegt zelf het volgende
 
 > Met onze Data Center-producten kun je profiteren van de flexibiliteit om te implementeren op een infrastructuur naar keuze. Dit is de beste keuze voor degenen met unieke of complexe operationele vereisten of die verder willen opschalen dan onze huidige cloudgebruikersniveaus. Als je upgradet heb je volledige controle over gegevensbeheer, beveiliging en compliance, en over hoe je uptime en prestaties beheert. **We raden Data Center aan voor degenen die strengere vereisten hebben en nog niet kunnen overstappen naar cloud**.
 
-Mijn eerste indruk is dat de Datacenter editite niet voor ons zal zijn aangezien het duur is en enkel nodig is als je nog niet de vereisten hebt om naar de cloud over te stappen. De logische keuze lijkt te gaan naar de standard cloud editie, aangezien die goedkoop is en juist genoeg storage zal hebben. Onze huidge confluence server heeft namelijk 256 GB aan storage.
+Mijn eerste indruk is dat de Datacenter editie niet voor ons zal zijn aangezien het duur is en enkel nodig is als je de vereisten niet hebt om naar de cloud over te stappen. De logische keuze lijkt te gaan naar de standard cloud editie, aangezien die goedkoop is en juist genoeg storage zal hebben. Onze huidige confluence server heeft namelijk 256 GB aan storage.
 
-[Hier](https://www.atlassian.com/nl/migration/assess/compare-cloud-data-center) kan je nog eens alle verschilllen tussen de cloud versie en de datacenter versie zien.
+[Hier](https://www.atlassian.com/nl/migration/assess/compare-cloud-data-center) kan worden alle verschillen tussen de cloud versie en de datacenter versie nog eens opgelijst.
 
 
 ## Overstap naar de cloud
@@ -80,45 +80,39 @@ Migreren gebeurt met de Confluence Cloud migration Assistant. Dit is een applica
 
 ![img1](./img/migration_assistent.png)
 
-We zien dat er 3 fasen zijn om te gaan migreren naar de cloud.
-
 ### Assess your apps
 
-In deze stage kun je alle applicatie (plugins) gaan zien die geïnstalleerd zijn op Confluence. Per applicatie kan je dan zien of de app kan gemigreerd worden en indien dit mogelijk is het pad die je moet volgen. Er zijn een heleboel applicaties die amper gebruikt worden en die waarschijnlijk gewoon weg mogen. De belangrijkste applicaties zullen de volgende zijn: Handy Macro's, PocketQuery, Reporting en Scafolding.
+In onderstaande afbeelding staan alle applicaties (plugins) die geïnstalleerd zijn op Confluence. Per applicatie staat er dan of de app kan gemigreerd worden en indien dit mogelijk is het pad die moet gevolgd worden. Er zijn een heleboel applicaties die amper gebruikt worden en die waarschijnlijk gewoon weg mogen. De belangrijkste applicaties zullen de volgende zijn: Handy Macro's, PocketQuery, Reporting en Scaffolding.
 
 ![img2](./img/access_your_apps.png)
 
-Merk op dat er bij can be migrated verschillende mogelijkheden zijn. Je hebt de volgende opties.
+Merk op dat er bij 'can be migrated` verschillende mogelijkheden zijn gebaseerd op hoe vlot het migratie process zal gebeuren.
 
 | | Beschrijving |
 | :-----: | :--- |
 | :x: | Applicatie kan niet gemigreerd worden aangezien er geen alternatief is voor in de Cloud. |
 | :heavy_check_mark: | Applicatie kan gemigreerd worden naar de cloud maar niet volledig automatisch. Er zijn nog bepaalde dingen waar rekening moet mee gehouden. |
-| :heavy_check_mark: (automated path - stage 1) | Applicatie in stage 1 hebben een ongekende of lage migratie success rate. Met andere woorden er is een grote kans dat het fout loopt. Bij problemen moet je contact opnemen met de app vendor. |
-| :heavy_check_mark: (automated path - stage 2) | Applicaties in stage 2 hebben een hoge success rate voor migratie naar de cloud. |
+| :heavy_check_mark: stage 1 | Applicatie in stage 1 hebben een ongekende of lage migratie success rate. Met andere woorden er is een grote kans dat het fout loopt. Bij problemen moet er contact opgenomen worden met de app vendor. |
+| :heavy_check_mark: stage 2 | Applicaties in stage 2 hebben een hoge success rate voor migratie naar de cloud. |
 
-### BELANGRIJK!
----
-Er zijn een aantal Queries van PocketQuery die niet ondersteund worden in de cloud! Die plugin is nodig om data van externe systemen op te lijsten in confluence. In de access your apps pagina hier boven kun je zien dat PocketQuery gebruikt word door 4519 pagina's in Confluence nu. PocketQuery kan gemigreerd worden naar de Cloud maar wel niet automatisch. Daarom dat we niet direct zullen kunnen migreren naar de cloud aangezien die queries eerst moeten vervangen worden door dingen die wel werken in de cloud.
+
+::: danger BELANGRIJK!
+Er zijn een aantal Queries van **PocketQuery** die niet ondersteund worden in de cloud! Die plugin is nodig om data van externe systemen op te lijsten in confluence. PocketQuery wordt nu door 4519 pagina's in Confluence gebruikt. Het kan gemigreerd worden naar de Cloud maar wel niet automatisch. Er zijn nog enkele queries die gebruikt worden die niet zullen werken in de cloud. Daarom moet er nog even gewacht worden met de migratie totdat de queries vervangen zijn door functionele cloud alternatieven.
+:::
 
 ## Automatic User/Group Provisioning
 
-Automatich User/Group provisioning is het process die automatisch gebruikers en groepen gaat aanmaken, verwijderen en up to date houden. Nu haalt Confluence de gebruikers en groepen van de lokale domain controller, maar als we verhuizen naar de cloud hoe zal dit dan gebeuren? Atlassian geeft ons de mogelijkheid om dit via **Azure AD**, maar er moeten wel aan een aantal prerequisites voldaan zijn.
+Automatic User/Group provisioning is het process die automatisch gebruikers en groepen gaat aanmaken, verwijderen en up to date houden. Nu haalt Confluence de gebruikers en groepen van de lokale domain controller, maar als er verhuist wordt naar de cloud hoe zal dit dan gebeuren? Atlassian geeft ons de mogelijkheid om dit via **Azure AD**, maar er moeten wel aan een aantal prerequisites voldaan zijn.
 
-### Prerequisites
+### Voorwaarden
 
-Dit zijn de benodigheden om Azure AD te gaan kopelen volgens Microsoft:
-
+Om de automatic user/group provisioning te activeren zijn er enkele voorwaarden:
 - An Azure AD tenant
-- A user account in Azure AD with permission to configure provisioning (e.g. Application Administrator, Cloud Application administrator, Application Owner, or Global Administrator)
+- A user account in Azure AD with permission to configure provisioning
 - An Atlassian Cloud tenant with an **Atlassian Access subscription**
 - A user account in Atlassian Cloud with Admin permissions
 
-Je kan zien dat we om automatic user provisioning te gaan implementeren we een abonnement nodig hebben voor **Atlassian Access**. Atlassian zegt zelf:
-
-> User provisioning is available when you subscribe to Atlassian Access. Read more about how to start with Atlassian Access.
-
-Hieronder kan je de prijzen zien van de verschillende abonnementen:
+Om automatic user provisioning te gaan implementeren is er een abonnement nodig is voor **Atlassian Access**. Atlassian Access is een apart programma die extra kost bovenop de confluence cloud subscriptie. Hieronder kan je de prijzen zien van de verschillende abonnementen:
 
 | Prijs per user | 100 users | 500 users | 1000 users |
 | :--- | :---: | :---: | :---: |
@@ -128,7 +122,7 @@ Hieronder kan je de prijzen zien van de verschillende abonnementen:
 
 ## Jira
 
-Een ander product van Atlassian is Jira. Dit is een issue tracking programma die bugs kan tracken en zorgen voor agile project management. De producten die ze hebben van Jira zijn de volgende:
+Een ander product van Atlassian is Jira. Dit wordt ook gebruikt in Dataline en het is een issue tracking programma die bugs tracked en zorgen voor agile project management. De producten die Atlassian heeft van Jira zijn de volgende:
 
 - Jira Cloud
 - Jira Server
@@ -143,4 +137,4 @@ Gelijkaardig met Confluence stopt de support voor de server versie in 2024. De c
 | Max aantal gebruikers | 10 | 20.000 | 20.000 | 20.000 |
 | Storage | 2 GB | 250 GB | unlimited | unlimited |
 
-Voor ons is de standard versie de beste keuze aangezien deze het goedkoopst is en we er genoeg features mee krijgen.
+Voor ons is de standard versie de beste keuze aangezien deze het goedkoopst is en er genoeg features in zitten

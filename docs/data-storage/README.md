@@ -6,8 +6,6 @@ Methoden zoals RAID en backups worden gebruikt om data te gaan beveiligen, maar 
 
 Wanneer er gesproken wordt over data storage dan mogen virtuele machines niet vergeten worden. Dataline maakt gebruik van virtuele machines om verschillende applicaties en services uit te voeren. De data van de virtuele machines moet beschermd worden zodat de applicaties altijd up and running zijn.
 
-<!-- In dit hoofdstuk worden enkele principes besproken op het vlak van storage en de opslag van virtuele servers. -->
-
 ## RAID
 
 RAID of redundant array of independent disks wordt gebruikt om harde schijven te gaan combineren in 1 enkel volume. Het doel ervan is om reads-/writes te versnellen of om data te beschermen. Dataline gebruikt RAID om data van hun servers te gaan beschermen en versnellen. 
