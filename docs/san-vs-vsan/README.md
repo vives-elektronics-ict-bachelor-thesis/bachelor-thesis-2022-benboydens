@@ -103,7 +103,7 @@ Het is belangrijk om te weten hoe de data wordt verdeeld over verschillende ESXi
 8. Het process licht de kernel in
 9. De VM krijgt de acknowledgement van de kernel wat evenwaardig is als een acknowledgement van de VMDK
 
-![img6](./img/data-placement.png)
+<img src="./img/data-placement.png" width="600" style="display: block;margin: 0 auto;"/>
 
 Waar precies het vSAN process de reads en writes naar toe stuurt hangt er van af. Het vSAN process zal de blokken data van de VMDK file gaan verspreiden over het netwerk. Het vSAN process onthoudt waar alles bewaard wordt. Zodat wanneer een read of write zich voort doet het process weet naar welke host het moet sturen.
 

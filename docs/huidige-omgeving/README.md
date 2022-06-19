@@ -9,7 +9,7 @@ Hieronder bevindt zich een oplijsting van alle applicaties, de virtuele machines
 ## Confluence
 
 Confluence is een content management systeem van Atlassian. Het is simpel gezegd een plek waar mensen documenten kunnen aanmaken en delen met elkaar. Het wordt door iedere werknemer gebruikt en bevat een heleboel belangrijke documenten. 
-De versie die nu gebruikt wordt van Confluence is de Server editie. Atlassian zelf wil afstappen van de lokale server editie en daarom verplichten ze de gebruikers om naar de cloud over te stappen. [Atlassian](https://www.atlassian.com/migration/assess/journey-to-cloud)
+De versie die nu gebruikt wordt van Confluence is de Server editie. Atlassian zelf wil afstappen van de lokale server editie en daarom verplichten ze de gebruikers om naar de cloud over te stappen.
 
 Er moet bekeken worden hoe Confluence zal gebracht worden naar de cloud zodat de gebruikers een transparante overgang ondervinden en dat alle huidige data veilig bewaart word. 
 

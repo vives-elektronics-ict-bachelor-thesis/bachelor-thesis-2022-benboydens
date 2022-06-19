@@ -71,8 +71,6 @@ Dan hebben is er ook nog de Datacenter versie die $27.000 kost per jaar. Daarin 
 
 Mijn eerste indruk is dat de Datacenter editie niet voor ons zal zijn aangezien het duur is en enkel nodig is als je de vereisten niet hebt om naar de cloud over te stappen. De logische keuze lijkt te gaan naar de standard cloud editie, aangezien die goedkoop is en juist genoeg storage zal hebben. Onze huidige confluence server heeft namelijk 256 GB aan storage.
 
-[Hier](https://www.atlassian.com/nl/migration/assess/compare-cloud-data-center) kan worden alle verschillen tussen de cloud versie en de datacenter versie nog eens opgelijst.
-
 
 ## Overstap naar de cloud
 
