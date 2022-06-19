@@ -24,7 +24,7 @@ Een domeincontroller staat in voor heel wat taken binnen een domein, zo zijn er 
 
 ### Nieuwe Domeincontroller
 
-Een windows server versie van 2016 of later is nodig om de synchronisatie van de domeincontroller naar de cloud mogelijk te maken. Domeincontroller DC1 voldoet hier niet aan en daarom moet er een nieuwe domeincontroller geïnstalleerd worden. We geven die domeincontroller een logische naam **DC-LOPPEM**. Deze domeincontroller zal in het begin samen werken met DC1 en na een bepaalde periode zal DC1 uitgeschakeld worden en neemt DC-LOPPEM de taak over. 
+Een windows server versie van 2016 of later is nodig om de synchronisatie van de domeincontroller naar de cloud mogelijk te maken. Domeincontroller DC1 voldoet hier niet aan en daarom moet er een nieuwe domeincontroller geïnstalleerd worden. De domeincontroller krijgt de naam **DC-LOPPEM**. Deze domeincontroller zal in het begin samen werken met DC1 en na een bepaalde periode zal DC1 uitgeschakeld worden en neemt DC-LOPPEM de taak over. 
 
 ![DC dataline 2](./img/domaincontrollers-2.png)
 
@@ -69,7 +69,7 @@ Ter illustratie worden de printers van Dataline eens bekeken. Die hebben de opti
 - **LDAP query root**: `CN=Users,DC=dataline,DC=eu`
 - **LDAP query**: `(objectclass=user)(objectCategory=person)`
 
-De **root** is de plek waar de query zal uitgevoerd worden en hier wordt dit de Users map. Dat wil zeggen dat we enkel objecten vinden die in de Users map zitten of in een submap ervan. De **query** zelf zal zoeken naar alle gebruikers objecten.
+De **root** is de plek waar de query zal uitgevoerd worden en hier wordt dit de Users map. Dat wil zeggen dat enkel objecten gevonden worden die in de Users map zitten of in een submap ervan. De **query** zelf zal zoeken naar alle gebruikers objecten.
 
 ### Nieuwe Queries
 
@@ -90,7 +90,7 @@ Om een beter zicht te krijgen hoe LDAP queries in elkaar zitten worden nog een e
 
 `(objectClass=user)(objectCategory=person)(!mail=*)`
 
-Deze query zoekt naar user objecten die behoren tot de 'Person' categorie. Dit zal alle accounts terug geven die gelinkt zijn aan een persoon (geen admin of service accounts). Een user object heeft een veld 'mail' die het mail adres bevat. Met `!mail=*` zoeken we alle gebruikers die een mail adres hebben en met het uitroepingsteken worden de selectie geïnverteerd.
+Deze query zoekt naar user objecten die behoren tot de 'Person' categorie. Dit zal alle accounts terug geven die gelinkt zijn aan een persoon (geen admin of service accounts). Een user object heeft een veld 'mail' die het mail adres bevat. Met `!mail=*` worden alle gebruikers die een mail adres hebben gezocht en met het uitroepingsteken worden de selectie geïnverteerd.
 
 #### Alle administrators accounts
 

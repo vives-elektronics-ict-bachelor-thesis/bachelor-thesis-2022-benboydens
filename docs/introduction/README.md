@@ -61,4 +61,4 @@ In de tweede fase wordt er onderzoek gedaan naar elke applicatie en er wordt gek
 
 In de derde fase wordt er gekeken naar de applicaties die lokaal moeten blijven. Voor die applicaties moet er ook gekeken worden naar de storage ervan zodat die applicaties fout tolerant zijn. Er zijn hier vele mogelijke aanpakken voor, welke is geschikt voor Dataline en past in hun budget?
 
-In de laatste fase word een test opstelling gemaakt op vlak van storage. Dit om te kijken of deze storage optie wel goed is voor de prijs.
+Ten slotte word een test opstelling gemaakt op vlak van storage. Dit om te kijken of deze storage optie wel goed is voor de prijs.
