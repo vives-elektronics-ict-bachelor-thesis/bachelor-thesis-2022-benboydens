@@ -1,12 +1,12 @@
 # Test Starwind vSAN
 
-Starwind vSAN is een bekende speler op de markt van Hyper Converged Infrastructure. Hun oplossing voor vSAN zou ideaal zijn voor Dataline aangezien er geen dure VMWare licenties nodig zijn. Maar de vraag is natuurlijk hoe goed is Starwind vSAN? Als eens gekeken wordt naar de reviews dan zijn er veel bedrijven tevreden met Starwind vSAN. Om te zijn van ons stuk wordt een test opstelling opgezet, hier wordt de performance, efficiëntie en kwaliteit van Starwind vSAN onder de loep genomen. 
+Starwind vSAN is een bekende speler op de markt van Hyper Converged Infrastructure. Hun oplossing voor vSAN zou ideaal zijn voor Dataline aangezien er geen dure VMWare licenties nodig zijn. Maar de vraag is natuurlijk hoe goed is Starwind vSAN? Als eens gekeken wordt naar de reviews dan zijn er veel bedrijven tevreden met Starwind vSAN. Om zeker te zijn wordt een test opstelling opgezet, hier wordt de performance, efficiëntie en kwaliteit van Starwind vSAN onder de loep genomen. 
 
 ## Opstelling
 
-Als opstelling worden 2 gebruikte desktop computers die Dataline nog liggen had gebruikt. Die breiden worden dan uitgebreid met een gloed nieuwe snelle netwerkkaart (NIC) met 2 poorten (25 Gbps) en een 350 GB SSD.
+Als opstelling worden 2 desktop computers van Dataline gebruikt. Die worden dan uitgebreid met een gloed nieuwe snelle netwerkkaart (NIC) met 2 poorten (25 Gbps) en een 350 GB SSD.
 
-Starwind heeft een 30 day free trial waarmee er een 2 node setup kan getest worden. Twee nodes is het absolute minimum dat nodig is om een vSAN te gebruiken. Met een node wordt hier een server bedoeld die de Starwind virtuele machine aan het draaien is. De setup die zal gevolgd worden is de volgende.
+Starwind heeft een 30 day free trial waarmee er een 2 node setup kan getest worden. Twee nodes is het absolute minimum dat nodig is om een vSAN te gebruiken. Met een node wordt hier een server bedoeld die de Starwind virtuele machine aan het draaien is. De setup die zal getest worden is de volgende.
 
 <img src="./img/starwind-virtual-san-for-vsphere.png" width="600" style="display: block;margin: 0 auto;"/>
 
@@ -15,17 +15,17 @@ In totaal zullen er 3 verbindingen nodig zijn op de nodes:
 - Synchronisatie
 - Management
 
-Het iSCSI/heartbeat en synchronisatie kanaal wordt gebruikt om data en commando's door te geven tussen de hosts. Deze verbindingen gebeuren best met de nieuwe netwerkkaart zodat de data zo snel mogelijk kan gesynchroniseerd worden. Management is bedoeld als aanspreekpunt voor het beheren van de ESXi host en Virtuele machines.
+Het iSCSI/heartbeat en synchronisatie kanaal wordt gebruikt om data en commando's door te geven tussen de hosts. Deze verbindingen gebeuren best met de nieuwe netwerkkaart zodat de data zo snel mogelijk kan gesynchroniseerd worden. Management is bedoeld als aanspreekpunt voor het beheren van de ESXi host en virtuele machines.
 
 ## Failover strategie
 
-Bij het geval dat de verbinding tussen 2 nodes zou weg vallen door een netwerk problemen dan hebben is er een zogenaamde netwerk partitie, dit zorgt dat de nodes niet meer kunnen communiceren met elkaar en kan leiden tot een **split brain** scenario. Split brain kan zeer erge gevolgen hebben zoals het verliezen van data en het moet absoluut vermeden worden.
+Bij het geval dat de 2 verbindingen tussen de nodes zou weg vallen dan is er een zogenaamde netwerk partitie, dit zorgt dat de nodes niet meer kunnen communiceren met elkaar en kan leiden tot een **split brain** scenario. Split brain kan zeer erge gevolgen hebben zoals het verliezen van data en het moet absoluut vermeden worden.
 
 ![splitbrain](./img/splitbrain.png)
 
 In deze situatie zal elke node naar zijn eigen storage schrijven. Zo ontstaan er data inconsistenties tussen de 2 nodes waardoor ze steeds meer van elkaar gaan verschillen. Uiteindelijk gaan ze zoveel met elkaar verschillen dat de data niet meer gesynchroniseerd kan worden.
 
-Als moet hersteld worden dan zal een node moeten gekozen worden om verder op te werken. Alle wijzigingen van de andere node worden daardoor ongedaan gemaakt. Het risico van een split brain scenario moet daarom zo laag mogelijk zijn. Starwind vSAN geeft ons 2 manieren om zo'n scenario te vermijden. 
+Als ze moet hersteld worden van een split brain scenario, dan zal er een enkele node gekozen worden om verder op te werken. Alle wijzigingen van de andere nodes worden daardoor ongedaan gemaakt. Het risico van een split brain scenario moet daarom zo laag mogelijk zijn. Starwind vSAN geeft ons 2 manieren om zo'n scenario te vermijden. 
 
 ### Heartbeat
 
@@ -48,11 +48,11 @@ Een andere manier om split brain te gaan vermijden is door een **Witness node** 
 
 <img src="./img/node_majority.png" width="450" style="display: block;margin: 0 auto;"/>
 
-Om te beslissen wie de primaire node wordt zal er een stemming gedaan worden. De node met de meeste stemmen wordt dan de primaire node. Elke node zal voor zichzelf stemmen waardoor en geen meerderheid zal zijn, daarom moet er een derde node om de knoop door te hakken. De witness zelf houd gewoon meta data bij en heeft dus zelf niet veel storage en resources nodig.
+Om te beslissen wie de primaire node wordt zal er een stemming gedaan worden. De node met de meeste stemmen wordt dan de primaire node. Elke node zal voor zichzelf stemmen waardoor er geen meerderheid zal zijn, daarom moet er een derde node zijn om de knoop door te hakken. De witness zelf houd gewoon meta data bij en heeft dus zelf niet veel storage en resources nodig.
 
 <img src="./img/failover_witness.png" width="450" style="display: block;margin: 0 auto;"/>
 
-Stel bovenstaande configuratie wordt gebruikt en de synchronisatie valt weg. Dan zal de witness node die verbonden is met beide nodes, een meerderheid vormen met de node die de meest relevante data heeft (in dit voorbeeld node 1). Daardoor zal node 2 gemarkeerd worden als niet gesynchroniseerd en zal die niet meer luisteren naar requests. Het grootte voordeel van deze aanpak is dat split brain zich niet meer kan voordoen, maar er is wel een extra node nodig.
+Stel bovenstaande configuratie wordt gebruikt en de synchronisatie valt weg. Dan zal de witness die verbonden is met beide nodes, een meerderheid vormen met de node die de meest relevante data heeft (in dit voorbeeld node 1). Daardoor zal node 2 gemarkeerd worden als niet gesynchroniseerd en zal die niet meer luisteren naar requests. Het grootte voordeel van deze aanpak is dat split brain zich niet meer kan voordoen, maar er is wel een extra node nodig.
 
 
 #### Voordelen
@@ -62,12 +62,12 @@ Stel bovenstaande configuratie wordt gebruikt en de synchronisatie valt weg. Dan
 
 #### Nadelen
 
-- Bij 2 node setup is een derde witness node nodig
-- met 3 nodes mag er maar 1 failure voorkomen
+- Voor een 2 node setup is een derde witness node nodig
+- Met 3 nodes mag er maar 1 failure voorkomen
 
 ## Synchronisatie test
 
-Om te kijken of de synchronisatie tussen de nodes gebeurt moeten er eens gecontroleerd worden als de er degelijk gerepliceerd wordt over de nodes. Met een simpele test wordt dit gecontroleerd.
+Om te kijken of de synchronisatie tussen de nodes gebeurt moet er eens gecontroleerd worden als de er degelijk gerepliceerd wordt over de nodes. Met een simpele test wordt dit gecontroleerd.
 1. Maak een bestand aan op één node. 
 2. Sluiten de vm af
 3. Start dezelfde VM op de andere node
@@ -77,7 +77,7 @@ Dit lukt zonder problemen en alles werkt zoals verwacht.
 
 ## Fio
 
-De manier waarop een workload zal gesimuleerd worden is door gebruik te maken van een Disk IO test tool genaamd **fio**. Het is een command line tool die zeer veel parameters heeft om te gaan testen. De gebruikte parameters zijn gebaseerd op een artikel van Oracle over het testen van Block storage [Oracle](https://docs.oracle.com/en-us/iaas/Content/Block/References/samplefiocommandslinux.htm).
+De manier waarop een workload zal gesimuleerd worden is door gebruik te maken van een Disk IO test tool genaamd **fio**. Het is een command line tool die zeer veel parameters heeft om te gaan testen. De gebruikte parameters zijn gebaseerd op een artikel van Oracle over het testen van Block storage. [Oracle](https://docs.oracle.com/en-us/iaas/Content/Block/References/samplefiocommandslinux.htm).
 
 Met fio worden IO operaties uitgevoerd om statistieken te verzamelen zoals:
 - Het aantal IOPS  (Input/Output operaties per seconde)
@@ -96,12 +96,12 @@ Alle testen worden rechtstreeks op de storage uitgevoerd behalve de file random 
 
 ## Performance testen
 
-Storage is de traagste factor van elke computer, daarom is de performance van storage zeer belangrijk voor virtuele machines. Om te kijken of Starwind vSAN een goede optie zou zijn, moeten er gecontroleerd worden hoe efficient Starwind omgaat met storage. Een heleboel factoren hebben invloed hebben op de performance van vSAN, dus het is belangrijk om verschillende opstellingen te testen en te kijken wat het beste optie is
+Storage is de traagste factor van elke computer, daarom is de performance van storage zeer belangrijk voor virtuele machines. Om te kijken of Starwind vSAN een goede optie zou zijn, moet er gecontroleerd worden hoe efficient Starwind omgaat met storage. Een heleboel factoren hebben invloed hebben op de performance van vSAN, dus het is belangrijk om verschillende opstellingen te testen en te kijken wat het beste optie is
 
 Er zijn 3 scenario's die interessant zijn om te testen voor performance:
 - VM op lokale datastore
 - VM op vSAN datastore
-- VM moet werken via iSCSI omdat lokale host niet gesynchroniseerd is.
+- VM moet werken via de remote host omdat lokale host niet gesynchroniseerd is.
 
 De laatste test is belangrijk want deze stelt het scenario voor dat een lokaal storage device niet meer beschikbaar zou zijn. De virtuele machine zal dan over het netwerk IO operaties doen met behulp van iSCSI. Op deze manier zal de virtuele machine nooit down komen te staan.
 
@@ -157,12 +157,12 @@ Er wordt een vm op de vSAN datastore opgestart. Met deze opstelling zal nog stee
 | Latency Performance Tests | Tijd (Read) | Tijd (Write) |
 | :--- | :---: | :---: |
 | Random Reads | 109,12 µs | / |
-| Random reads/writes | 266,03 µs | 406,39 µs |
+| Random reads/writes | 266,03 µs | 278,94 µs |
 
 
-### Via iSCSI verbinding
+### Remote host
 
-Deze keer wordt de Starwind vSAN node afgesloten op de host. Dit zorgt dat de vm geen toegang meer zal hebben tot de lokale SSD. De vm moet nu via de vSAN datastore IO operaties gaan uitvoeren op de andere Starwind node. Het zal dit doet doen aan de hand van iSCSI commando's. De iSCSI verbinding gaat over de nieuwe snelle netwerk kaart (25 Gbps), hierdoor zou er niet zo'n groot verschil mogen zijn ten opzichte van de vSAN datastore.
+Deze keer wordt de Starwind vSAN node afgesloten op de host. Dit zorgt dat de vm geen toegang meer zal hebben tot de lokale SSD. De vm moet nu via de vSAN datastore IO operaties gaan uitvoeren op de andere host. Het zal dit doet doen aan de hand van iSCSI commando's. De iSCSI verbinding gaat over de nieuwe snelle netwerk kaart (25 Gbps), hierdoor zou er niet zo'n groot verschil mogen zijn ten opzichte van de vSAN datastore. In onderstaande figuur wordt het pad van IO request gevisualiseerd.
 
 <img src="./img/performance_test_vsan-iscsi.png" width="650" style="display: block;margin: 0 auto;"/>
 
@@ -209,7 +209,7 @@ Hier wordt gekeken naar de gemiddelde bandbreedte voor elk scenario. Het valt op
 
 ### Latency
 
-In de onderstaande grafiek wordt gekeken naar de tijd dat de SSD erover doet om een IO request te voldoen. Er is een duidelijk verschil namelijk dat requests op de lokale datastore sneller worden beantwoord. Net zoals bij de IOPS zullen requests sneller de SSD bereiken met een lokale datastore.
+In de onderstaande grafiek wordt gekeken naar de tijd dat de SSD erover doet om een IO request te voldoen. Er is een duidelijk verschil namelijk dat requests op de lokale datastore sneller worden beantwoord. Net zoals bij de IOPS test zullen requests sneller de SSD bereiken met een lokale datastore.
 
 <img src="./img/average_lat_compared.png" height="350" style="display: block;margin: 0 auto;"/>
 

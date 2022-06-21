@@ -1,6 +1,6 @@
 # Huidige omgeving
 
-In de eerste fase kijken wordt de huidige omgeving van Dataline bekeken. De applicaties en services die nu in gebruikt zijn worden opgelijst. Er wordt een lijst opgesteld van alles die naar de cloud mag en alles die juist lokaal moet blijven. 
+In de eerste fase wordt de huidige omgeving van Dataline bekeken. De applicaties en services die nu in gebruikt zijn worden opgelijst. Er wordt een lijst opgesteld van alles die naar de cloud mag en alles die juist lokaal moet blijven. 
 
 Alle applicaties en services worden uitgevoerd op virtuele machines. Dit maakt het toekennen van resources gemakkelijk en zorgt dat het besturingssysteem kan gekozen worden. Per virtuele machine wordt er een aantal vCores, RAM en Storage toegekend. vCores is het aantal CPU cores die de virtuele machine denkt dat hij heeft. vCores komen niet 1 voor 1 overeen met fysieke cores, maar eerder met draden (threads).
 
